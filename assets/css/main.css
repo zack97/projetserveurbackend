@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+header {
+  background-color: #00bfff;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  width: 50px;
+  height: 50px;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  padding: 10px;
+}
+
+nav a:hover {
+  background-color: #048fbd;
+  transition: 0.9s ease-out;
+}
+
+/**/
+
+main {
+  background-color: azure;
+  padding: 40px;
+}
+
+.main-h2 {
+  margin-bottom: 20px;
+}
+
+.first-article {
+  display: flex;
+  min-height: auto;
+  gap: 40px;
+  padding-bottom: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.first-article-right {
+  flex: 1;
+}
+
+.first-article-right img {
+  margin: 0px 20px;
+}
+
+.first-article-right h2 {
+  border: 1px dotted #0056b3;
+  padding: 5px;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.first-article-right h2 a:hover {
+  text-decoration: underline;
+}
+
+.first-article-right p {
+  margin-top: 10px;
+}
+
+/**/
+
+.first-article-left {
+  border: 10px solid azure;
+  box-shadow: 1px 1px 5px #048fbd;
+  background-color: white;
+  hr {
+    border: 10px solid #00bfff;
+  }
+}
+
+.left1,
+.left2,
+.left3 {
+  display: flex;
+  margin: 10px;
+  img {
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  h2 {
+    padding: 5px;
+    font-size: 22px;
+    margin: 10px 0px;
+  }
+}
+
+/**/
+
+.articles-ul {
+  display: flex;
+  margin-top: 40px;
+  background-color: white;
+  hr {
+    border: 10px solid #00bfff;
+  }
+
+  .hr_link {
+    border: 1px dotted #d9e5e9;
+  }
+
+  ul {
+    list-style: none;
+    padding: 20px;
+  }
+  .li1,
+  .li2 {
+    display: flex;
+    margin: 30px 10px;
+    img {
+      margin: 20px;
+      width: 200px;
+      height: 200px;
+    }
+    a {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 10px 0px;
+    }
+  }
+}
+
+.favorite-button {
+  padding: 8px 16px;
+  background-color: #00bfff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.favorite-button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #00bfff;
+  color: white;
+}
