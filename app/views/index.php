@@ -1,5 +1,6 @@
 <?php
 session_start(); // Start the session to access user data
+
 ?>
 
 <!DOCTYPE html>
@@ -53,26 +54,26 @@ session_start(); // Start the session to access user data
                 </div>
                 <hr>
                 <div class="left2">
-                    <?php $firstArticle = $articles[2]; ?>
-                    <img src="/<?php echo htmlspecialchars($firstArticle['image_path']); ?>" alt="<?php echo htmlspecialchars($firstArticle['title']); ?>">
+                    <?php $firstArticle1 = $articles[2]; ?>
+                    <img src="/<?php echo htmlspecialchars($firstArticle1['image_path']); ?>" alt="<?php echo htmlspecialchars($firstArticle1['title']); ?>">
                     <div>
-                        <h2><a href="article.php?id=<?php echo $firstArticle['id']; ?>"><?php echo $firstArticle['title']; ?></a></h2>
-                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($firstArticle['author']); ?></p>
-                        <p><strong>Date de publication :</strong> <?php echo htmlspecialchars($firstArticle['date_published']); ?></p>
-                        <p><?php echo htmlspecialchars($firstArticle['content']); ?></p>
-                        <button class="favorite-button" data-article-id="<?php echo $firstArticle['id']; ?>" onclick="ajouterAuxFavoris(<?php echo $firstArticle['id']; ?>)">Ajouter aux favoris</button>
+                        <h2><a href="article.php?id=<?php echo $firstArticle1['id']; ?>"><?php echo $firstArticle1['title']; ?></a></h2>
+                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($firstArticle1['author']); ?></p>
+                        <p><strong>Date de publication :</strong> <?php echo htmlspecialchars($firstArticle1['date_published']); ?></p>
+                        <p><?php echo htmlspecialchars($firstArticle1['content']); ?></p>
+                        <button class="favorite-button" data-article-id="<?php echo $firstArticle1['id']; ?>" onclick="ajouterAuxFavoris(<?php echo $firstArticle1['id']; ?>)">Ajouter aux favoris</button>
                         </div>          
                 </div>
                 <hr>
                 <div class="left3">
-                    <?php $firstArticle = $articles[3]; ?>
-                    <img src="/<?php echo htmlspecialchars($firstArticle['image_path']); ?>" alt="<?php echo htmlspecialchars($firstArticle['title']); ?>" >
+                    <?php $firstArticle2 = $articles[3]; ?>
+                    <img src="/<?php echo htmlspecialchars($firstArticle2['image_path']); ?>" alt="<?php echo htmlspecialchars($firstArticle2['title']); ?>" >
                     <div>
-                        <h2><a href="article.php?id=<?php echo $firstArticle['id']; ?>"><?php echo $firstArticle['title']; ?></a></h2>
-                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($firstArticle['author']); ?></p>
-                        <p><strong>Date de publication :</strong> <?php echo htmlspecialchars($firstArticle['date_published']); ?></p>
-                        <p><?php echo htmlspecialchars($firstArticle['content']); ?></p>
-                        <button class="favorite-button" data-article-id="<?php echo $firstArticle['id']; ?>" onclick="ajouterAuxFavoris(<?php echo $firstArticle['id']; ?>)">Ajouter aux favoris</button>
+                        <h2><a href="article.php?id=<?php echo $firstArticle2['id']; ?>"><?php echo $firstArticle2['title']; ?></a></h2>
+                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($firstArticle2['author']); ?></p>
+                        <p><strong>Date de publication :</strong> <?php echo htmlspecialchars($firstArticle2['date_published']); ?></p>
+                        <p><?php echo htmlspecialchars($firstArticle2['content']); ?></p>
+                        <button class="favorite-button" data-article-id="<?php echo $firstArticle2['id']; ?>" onclick="ajouterAuxFavoris(<?php echo $firstArticle2['id']; ?>)">Ajouter aux favoris</button>
                         </div>          
                 </div>
             </div>
