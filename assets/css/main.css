@@ -170,3 +170,26 @@ footer {
   background-color: #00bfff;
   color: white;
 }
+
+/***/
+
+.apropos-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    border: 5px inset #00bfff;
+    box-shadow: 1px 1px 5px orange;
+    height: auto;
+    width: 80%;
+    font-size: 27px;
+    text-align: center;
+    padding: 50px;
+  }
+  hr {
+    border: 10px solid #00bfff;
+    margin-bottom: 20px;
+  }
+}

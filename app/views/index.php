@@ -15,12 +15,12 @@ session_start(); // Start the session to access user data
         <img src="/media/fr24_icon.jpg" alt="icon_france24"  >
         <nav>
             <a href="/">Accueil</a>
+            <a href="/app/views/apropos.php">À Propos</a>
             <?php if (isset($_SESSION['user']) && is_array($_SESSION['user']) && isset($_SESSION['user']['first_name'])): ?>
                 <span>Bonjour, <?php echo htmlspecialchars($_SESSION['user']['first_name']); ?></span>
                 <a href="/public/favoris.php" class="logout-button" >Mes Favoris</a>
                 <a href="/logout.php" class="logout-button">Se déconnecter</a>
             <?php else: ?>
-                <a href="/app/views/apropos.php">À Propos</a>
                 <a href="/app/views/user.php">Identifiez-vous</a>
             <?php endif; ?>
         </nav>
