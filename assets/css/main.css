@@ -10,9 +10,17 @@ body {
   padding: 0;
 }
 
+.name_display {
+  display: none;
+}
+
 a {
   text-decoration: none;
   color: #333;
+}
+
+h6 {
+  display: none;
 }
 
 header {
@@ -22,6 +30,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.none_icon {
+  display: none;
 }
 
 header img {
@@ -177,17 +189,18 @@ footer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   div {
     border: 5px inset #00bfff;
     box-shadow: 1px 1px 5px orange;
     height: auto;
     width: 80%;
-    font-size: 27px;
+    font-size: 17px;
     text-align: center;
     padding: 50px;
   }
+
   hr {
     border: 10px solid #00bfff;
     margin-bottom: 20px;

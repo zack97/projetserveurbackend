@@ -9,16 +9,24 @@ session_start(); // Start the session to access user data
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main_resp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>France24 - Accueil</title>
 </head>
 <body>
     <header>
         <img src="/media/fr24_icon.jpg" alt="icon_france24"  >
+        <?php if (isset($_SESSION['user']) && is_array($_SESSION['user']) && isset($_SESSION['user']['first_name'])): ?>
+           <span class="name_display">Welcome, <?php echo htmlspecialchars($_SESSION['user']['first_name']); ?></span> 
+           <hr class="hrhr">
+           <h6 class="h6"><?php echo htmlspecialchars($_SESSION['user']['country']);?></h6>
+        <?php endif; ?>
+        <div class="hamburger none_icon"><i class="fa-solid fa-bars"></i></div>
         <nav>
             <a href="/">Accueil</a>
             <a href="/app/views/apropos.php">À Propos</a>
             <?php if (isset($_SESSION['user']) && is_array($_SESSION['user']) && isset($_SESSION['user']['first_name'])): ?>
-                <span>Bonjour, <?php echo htmlspecialchars($_SESSION['user']['first_name']); ?></span>
+                <span class="name-drop">Bonjour, <?php echo htmlspecialchars($_SESSION['user']['first_name']); ?></span>
                 <a href="/public/favoris.php" class="logout-button" >Mes Favoris</a>
                 <a href="/logout.php" class="logout-button">Se déconnecter</a>
             <?php else: ?>
@@ -133,6 +141,17 @@ session_start(); // Start the session to access user data
 
             console.log(data)
         }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('header div'); 
+            const nav = document.querySelector('nav'); 
+
+            hamburger.addEventListener('click', () => {
+                nav.classList.toggle('show-nav'); 
+            });
+        });
+
    </script>
 </body>
 </html>
