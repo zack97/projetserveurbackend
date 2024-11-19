@@ -60,15 +60,15 @@ main {
 .signup,
 .login {
   width: 100%;
-  box-shadow: 1px 1px 5px #00bfff;
+  box-shadow: 1px 1px 5px white;
   background-color: white;
   display: flex;
   flex-direction: column;
   padding: 20px;
   form {
     padding: 20px;
-    border: 1px solid red;
-    box-shadow: 1px 1px 5px #00bfff;
+    /* border: 1px solid #00bfff; */
+    box-shadow: 1px 1px 3px #00bfff;
   }
 
   .form-group {

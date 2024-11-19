@@ -77,11 +77,11 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
             })
             .then(response => response.text())
             .then(data => {
-                console.log(data); // Affiche la réponse dans la console
-                alert(data);       // Affiche un message à l'utilisateur
-                location.reload(); // Recharge la page
+                console.log(data); 
+                alert(data);       
+                location.reload(); 
             })
-            .catch(error => console.error('Error:', error)); // Gère les erreurs
+            .catch(error => console.error('Error:', error));
         }
     </script>
 </body>

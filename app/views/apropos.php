@@ -42,7 +42,7 @@ session_start(); // Start the session to access user data
        <?php endif; ?>
       <div>
          <p>
-           Votre source incontournable d'informations fiables et diversifiées. <br> <br> <hr>
+           Votre source incontournable d'informations fiables et diversifiées. 
            Nous sommes un média indépendant dédié à vous offrir des actualités précises, pertinentes et accessibles, où que vous soyez. <br> <br>
            Notre mission est de vous tenir informé des événements qui façonnent le monde,  en vous proposant des analyses approfondies,  
            des reportages exclusifs et des opinions variées. Que ce soit la politique, l'économie, la culture, le sport ou les dernières innovations technologiques, 

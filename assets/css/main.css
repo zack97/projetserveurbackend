@@ -99,8 +99,7 @@ main {
 /**/
 
 .first-article-left {
-  border: 10px solid azure;
-  box-shadow: 1px 1px 5px #048fbd;
+  box-shadow: 1px 1px 1px #00bfff;
   background-color: white;
   hr {
     border: 10px solid #00bfff;
@@ -185,7 +184,7 @@ footer {
 
 /***/
 
-.apropos-main {
+/* .apropos-main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -205,4 +204,97 @@ footer {
     border: 10px solid #00bfff;
     margin-bottom: 20px;
   }
+} */
+
+.apropos-main {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+}
+
+/* Heading Styling */
+.apropos-main h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraph Styling */
+.apropos-main p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: justify;
+  color: #34495e;
+  margin-bottom: 2rem;
+}
+
+.apropos-main p hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid #ecf0f1;
+}
+
+/* General Content Styling */
+.apropos-main div {
+  margin-top: 1.5rem;
+}
+/*******************/
+
+.single-article {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.single-article h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Author and Date Styling */
+.single-article p {
+  margin-bottom: 1rem;
+}
+
+.single-article p strong {
+  color: #2980b9;
+  font-weight: bold;
+}
+
+.single-article p:first-of-type {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+/* Content Styling */
+.single-article p:last-of-type {
+  font-size: 1.2rem;
+  color: #34495e;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Image Styling */
+.single-article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
