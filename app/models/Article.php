@@ -1,11 +1,9 @@
 <?php
-// app/models/Article.php
 
 class Article
 {
     public static function getAllArticles()
     {
-        // You could fetch this data from a database or API, but for now, using static data.
         return [
             ['id' => 1, 'title' => 'Les cyberattaques engendrées par la guerre russo-ukrainienne ont coûté deux milliards d\'euros aux organisations françaises en 2022', 'author' => 'Normand Roland', 'date_published' => '2022-12-01', 'content' => 'Deux milliards d’euros. C’est le coût colossal des cyberattaques réussies sur les systèmes d’information des organisations françaises, selon une estimation réalisée par le cabinet d’études économiques Asterès pour le compte du CRiP, une ...', 'image_path' => 'media/cyberattaque-france.jpg'],
             ['id' => 2, 'title' => 'Climat : un rapport révèle des cas pour les écosystèmes marins', 'author' => 'Marine Leclerc', 'date_published' => '2022-11-20', 'content' => 'Selon une étude récente, les écosystèmes marins sont confrontés à des changements irréversibles en raison de la hausse des températures océaniques et de l\'acidification. Des experts recommandent une action immédiate pour limiter les émissions ...', 'image_path' => 'media/climat-ocean.jpg'],

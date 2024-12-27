@@ -10,6 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 $userId = $_SESSION['user']['id']; // ID de l'utilisateur connecté
 
+
 // Récupère les articles favoris de l'utilisateur
 $stmt = $pdo->prepare("SELECT articles.* FROM articles INNER JOIN favoris ON articles.id = favoris.article_id WHERE favoris.user_id = ?");
 $stmt->execute([$userId]);
@@ -51,6 +52,7 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <ul>
             <?php if (empty($favoris)): ?>
                 <p>Vous n'avez aucun article dans vos favoris.</p>
+                <?php echo $userId  ?>
             <?php else: ?>
                 <?php foreach ($favoris as $favori): ?>
                     <li>
@@ -73,16 +75,20 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
             fetch('/app/controllers/ajouter_favori.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'article_id=' + articleId
+                body: 'article_id=' + articleId + '&action=delete'
             })
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erreur réseau : ${response.status}`);
+                }
+                return response.text();
+            })
             .then(data => {
-                console.log(data); 
-                alert(data);       
-                location.reload(); 
+                alert(data);
+                location.reload(); // Recharge la page pour mettre à jour la liste des favoris
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Erreur :', error));
         }
-    </script>
+</script>
 </body>
 </html>

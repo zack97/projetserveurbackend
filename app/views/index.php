@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access user data
+session_start(); 
 
 ?>
 
@@ -137,10 +137,13 @@ session_start(); // Start the session to access user data
                 body: 'article_id=' + articleId
             })
             .then(response => response.text())
-            .then(data => alert(data));
-
-            console.log(data)
+            .then(data => {
+        if (data.success) {
+            alert(data.message); // Succès
+        } else {
+            alert(data.message); // Erreur côté serveur
         }
+    })}
 
 
         document.addEventListener('DOMContentLoaded', () => {

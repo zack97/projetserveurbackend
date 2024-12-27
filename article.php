@@ -1,4 +1,7 @@
 <?php
+session_start(); 
+
+
 $articles = [
     ['id' => 1, 'title' => 'Les cyberattaques engendrées par la guerre russo-ukrainienne ont coûté deux milliards d\'euros aux organisations françaises en 2022', 'author' => 'Normand Roland', 'date_published' => '2022-12-01', 'content' => 'Deux milliards d’euros. C’est le coût colossal des cyberattaques réussies sur les systèmes d’information des organisations françaises, selon une estimation réalisée par le cabinet d’études économiques Asterès pour le compte du CRiP, une ...', 'image_path' => 'media/cyberattaque-france.jpg'],
     ['id' => 2, 'title' => 'Les cyberattaques engendrées par la guerre russo-ukrainienne ont coûté deux milliards d\'euros aux organisations françaises en 2022', 'author' => 'Normand Roland', 'date_published' => '2022-12-01', 'content' => 'Deux milliards d’euros. C’est le coût colossal des cyberattaques réussies sur les systèmes d’information des organisations françaises, selon une estimation réalisée par le cabinet d’études économiques Asterès pour le compte du CRiP, une ...', 'image_path' => 'media/cyberattaque-france.jpg'],
