@@ -17,7 +17,7 @@ $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
 generateHeader('./media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
-generatenav('./views/controllers/recherche.php');
+generatenav('./app/controllers/recherche.php');
 
 // Fonction pour afficher les articles favoris
 function favori($userId) {
