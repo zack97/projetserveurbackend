@@ -340,8 +340,12 @@ function generateboottraap(){
  *               RECHERCHEFORMULAIRE()
  * *************************************************** */
 
+ 
 
  function rechercheformulaire() {
+    require_once __DIR__ . '/../../config/database.php';
+
+
     ?>
     <div class="container mt-3">
         <h1 class="text-center">Search Articles</h1>
@@ -381,13 +385,15 @@ function generateboottraap(){
 
     // Traiter le formulaire si soumis
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $jsonFilePath = '../../Model/articles.json'; // Chemin vers le fichier JSON contenant les articles
-        $filteredArticles = rechercheArticles($jsonFilePath); // Obtenir les articles filtrés
+        $pdo = Database::connect();
+
+        $filteredArticles = rechercheArticles($pdo); // Get filtered articles from the database
+      
         if (empty($filteredArticles)) {
-            // Afficher le message si aucun article n'est trouvé
+            // Display message if no articles are found
             echo "<div class='alert alert-warning text-center'>No articles found for the specified reading time</div>";
         } else {
-            // Afficher les articles filtrés
+            // Display the found articles
             foundarticle($filteredArticles);
         }
     }
@@ -410,44 +416,28 @@ function generateboottraap(){
  * *************************************************** */
 
 
- function rechercheArticles($jsonFilePath) {
-    // Charger les articles depuis le fichier JSON
-    $articles = json_decode(file_get_contents($jsonFilePath), true);
-
-    if (!$articles) {
-        echo "<div class='alert alert-danger'>Erreur : Impossible de charger les articles.</div>";
-        return [];
-    }
+function rechercheArticles($pdo) {
 
     // Récupérer les données du formulaire
     $readingTimeMin = isset($_POST['readingTimeMin']) ? (int) $_POST['readingTimeMin'] : 0;
     $readingTimeMax = isset($_POST['readingTimeMax']) ? (int) $_POST['readingTimeMax'] : PHP_INT_MAX;
 
-    $filteredArticles = [];
+    // Prepare and execute the SQL query
+    $sql = "SELECT * FROM articles WHERE duree BETWEEN :readingTimeMin AND :readingTimeMax";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':readingTimeMin', $readingTimeMin, PDO::PARAM_INT);
+    $stmt->bindParam(':readingTimeMax', $readingTimeMax, PDO::PARAM_INT);
+    $stmt->execute();
 
-    // Parcourir les sections d'articles
-    foreach (['latest', 'featured'] as $section) {
-        if (isset($articles[$section])) {
-            foreach ($articles[$section] as $article) {
-                $readingTime = $article['duree'] ?? ''; // Utiliser 0 si non défini
-                if ($readingTime >= $readingTimeMin && $readingTime <= $readingTimeMax) {
-                    $filteredArticles[] = $article;
-                }
-            }
-        }
-    }
+    $filteredArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $filteredArticles; // Retourner les articles filtrés
+    return $filteredArticles; 
 }
 
 
 
 
-
-
 /***************************************************************************************** */
-
-
 
 
 
@@ -457,47 +447,41 @@ function generateboottraap(){
  * *************************************************** */
 
 
- function foundarticle($articles) {
-
+function foundarticle($articles) {
     ?>
-   
-       <div class="container mt-3">
-           <div class="row">
-               <div class="col-12">
-                   <h1 class="text-center text-md-left">Résultats de la Recherche</h1>
-               </div>
-           </div>
-   
-           <div class="contenu">
-               <div class="row">
-                   <div class="col-md-12">
-                       <?php foreach ($articles as $article) { ?>
-                           <article class="mb-3 border-bottom pb-3">
-                               <div>
-                                   <small>Publié le <?php echo htmlspecialchars($article['published'] ?? 'Date inconnue'); ?></small>
-                               </div>
-                               <?php if (!empty($article['image'])) { ?>
-                                   <img src="<?php echo htmlspecialchars(str_replace('/View', '.', $article['image'])); ?>" 
-                                        alt="Image de l'article" class="mr-2 image-size">
-                               <?php } ?>
-                               <a href="single_article.php?id=<?php echo htmlspecialchars($article['id'] ?? ''); ?>">
-                                   <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>
-                               </a>
-                               <p><?php echo htmlspecialchars($article['content']); ?></p>
-                               <small>Source : <?php echo htmlspecialchars($article['source'] ?? 'Source inconnue'); ?></small>
-                               <div>Temps de lecture : 
-                                   <strong><?php echo htmlspecialchars($article['duree'] ?? 'N/A'); ?> minutes</strong>
-                               </div>
-                           </article>
-                       <?php } ?>
-                   </div>
-               </div>
-           </div>
-       </div>
-   
-       <?php
-       }
-      
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center text-md-left">Résultats de la Recherche</h1>
+            </div>
+        </div>
 
-
+        <div class="contenu">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php foreach ($articles as $article) { ?>
+                        <article class="mb-3 border-bottom pb-3">
+                            <div>
+                                <small>Publié le <?php echo htmlspecialchars($article['published'] ?? 'Date inconnue'); ?></small>
+                            </div>
+                            <?php if (!empty($article['image'])) { ?>
+                                <img src="../.<?php echo htmlspecialchars($article['image']); ?>" 
+                                     alt="Image de l'article" class="mr-2 image-size">
+                            <?php } ?>
+                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
+                                <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>
+                            </a>
+                            <p><?php echo htmlspecialchars($article['content']); ?></p>
+                            <small>Source : <?php echo htmlspecialchars($article['source'] ?? 'Source inconnue'); ?></small>
+                            <div>Temps de lecture : 
+                                <strong><?php echo htmlspecialchars($article['duree']); ?> minutes</strong>
+                            </div>
+                        </article>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 ?>
