@@ -1,43 +1,112 @@
 <?php
+
+require_once __DIR__ . '/../../config/database.php';
+
 class User {
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=france24', 'root', 'zack10');
+        try {
+            $this->db = new PDO('mysql:host=localhost;dbname=projetserveur', 'root', 'zack10', [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+        } catch (PDOException $e) {
+            die("Database connection failed: " . $e->getMessage());
+        }
     }
 
+
+    public function getDb() {
+        return $this->db;
+    }
+
+    /**
+     * Register a new user
+     */
     public function register($data) {
-        // Hash the password
-        $password = password_hash($data['password'], PASSWORD_BCRYPT);
+        try {
+            // Hash the password
+            $password = password_hash($data['password'], PASSWORD_BCRYPT);
 
-        $stmt = $this->db->prepare("INSERT INTO users (email, password, first_name, last_name, birthdate, address, postal_code, city, country, phone)
-                                    VALUES (:email, :password, :first_name, :last_name, :birthdate, :address, :postal_code, :city, :country, :phone)");
+            // Check if the email already exists
+            if ($this->isEmailTaken($data['email'])) {
+                return "Email is already taken.";
+            }
 
-        if ($stmt->execute([
-            ':email' => $data['email'],
-            ':password' => $password,
-            ':first_name' => $data['first_name'],
-            ':last_name' => $data['last_name'],
-            ':birthdate' => $data['birthdate'],
-            ':address' => $data['address'],
-            ':postal_code' => $data['postal_code'],
-            ':city' => $data['city'],
-            ':country' => $data['country'],
-            ':phone' => $data['phone']
-        ])) {
+            // Prepare the SQL statement
+            $stmt = $this->db->prepare(
+                "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)"
+            );
+
+            // Execute the statement with provided user data
+            $stmt->execute([
+                ':username' => $data['username'],
+                ':email' => $data['email'],
+                ':password' => $password,
+            ]);
+
+            // Return the ID of the newly created user
             return $this->db->lastInsertId();
+        } catch (PDOException $e) {
+            error_log("Registration failed: " . $e->getMessage());
+            return false;
         }
-        return false;
     }
 
+    /**
+     * Log in an existing user
+     */
     public function login($data) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->execute([':email' => $data['email']]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            // Prepare SQL query to fetch the user
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->execute([':email' => $data['email']]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($data['password'], $user['password'])) {
-            return $user;
+            // Verify the password and return the user data if successful
+            if ($user && password_verify($data['password'], $user['password'])) {
+                // Start a session for the user
+                session_start();
+                $_SESSION['user'] = $user;
+                return true;
+            }
+            return "Invalid email or password.";
+        } catch (PDOException $e) {
+            error_log("Login failed: " . $e->getMessage());
+            return false;
         }
-        return false;
     }
+
+    
+
+    /**
+     * Check if an email is already registered
+     */
+    public function isEmailTaken($email) {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $stmt->execute([':email' => $email]);
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Email check failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Get user by ID
+     */
+    public function getUserById($id) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            error_log("Get user by ID failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
+  
 }
