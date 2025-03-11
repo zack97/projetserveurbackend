@@ -423,7 +423,7 @@ function rechercheArticles($pdo) {
     $readingTimeMax = isset($_POST['readingTimeMax']) ? (int) $_POST['readingTimeMax'] : PHP_INT_MAX;
 
     // Prepare and execute the SQL query
-    $sql = "SELECT * FROM articles WHERE duree BETWEEN :readingTimeMin AND :readingTimeMax";
+    $sql = "SELECT * FROM t_article WHERE readtime_art BETWEEN :readingTimeMin AND :readingTimeMax";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':readingTimeMin', $readingTimeMin, PDO::PARAM_INT);
     $stmt->bindParam(':readingTimeMax', $readingTimeMax, PDO::PARAM_INT);
@@ -462,19 +462,18 @@ function foundarticle($articles) {
                     <?php foreach ($articles as $article) { ?>
                         <article class="mb-3 border-bottom pb-3">
                             <div>
-                                <small>Publié le <?php echo htmlspecialchars($article['published'] ?? 'Date inconnue'); ?></small>
+                                <small>Publié le <?php echo htmlspecialchars($article['date_art'] ?? 'Date inconnue'); ?></small>
                             </div>
-                            <?php if (!empty($article['image'])) { ?>
-                                <img src="../.<?php echo htmlspecialchars($article['image']); ?>" 
+                            <?php if (!empty($article['image_art'])) { ?>
+                                <img src="<?php echo htmlspecialchars($article['image_art']); ?>" 
                                      alt="Image de l'article" class="mr-2 image-size">
                             <?php } ?>
-                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
-                                <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>
+                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                                <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                             </a>
-                            <p><?php echo htmlspecialchars($article['content']); ?></p>
-                            <small>Source : <?php echo htmlspecialchars($article['source'] ?? 'Source inconnue'); ?></small>
+                            <p><?php echo htmlspecialchars($article['content_art']); ?></p>
                             <div>Temps de lecture : 
-                                <strong><?php echo htmlspecialchars($article['duree']); ?> minutes</strong>
+                                <strong><?php echo htmlspecialchars($article['readtime_art']); ?> minutes</strong>
                             </div>
                         </article>
                     <?php } ?>

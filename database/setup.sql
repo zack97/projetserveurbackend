@@ -10,6 +10,32 @@ CREATE TABLE articles (
     duree INT
 );
 
+DROP TABLE IF EXISTS `t_article`;
+CREATE TABLE IF NOT EXISTS `t_article` (
+  `id_art` int NOT NULL AUTO_INCREMENT COMMENT 'primary key',
+  `ident_art` int DEFAULT NULL,
+  `date_art` date DEFAULT NULL,
+  `readtime_art` int DEFAULT NULL,
+  `title_art` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `hook_art` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT 'résumé de l''article, càd le premier paragraphe',
+  `url_art` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `fk_category_art` int NOT NULL,
+  `content_art` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_art` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'nom de l''image d''illustration',
+  PRIMARY KEY (`id_art`),
+  UNIQUE KEY `ident_index` (`ident_art`),
+  KEY `t_article_fk_category_art_index` (`fk_category_art`)
+) ENGINE=InnoDB AUTO_INCREMENT=5594 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE IF NOT EXISTS `t_category` (
+  `id_cat` int NOT NULL AUTO_INCREMENT COMMENT 'clé primaire',
+  `name_cat` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_cat`)
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 
 ALTER TABLE articles ADD COLUMN featured BOOLEAN DEFAULT 0;
@@ -28,7 +54,7 @@ CREATE TABLE favorites (
     article_id BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (user_id, article_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
+    FOREIGN KEY (article_id) REFERENCES t_article(id) ON DELETE CASCADE
 );
 
 

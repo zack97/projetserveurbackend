@@ -4,7 +4,8 @@
 
 class Database {
     private static $host = 'localhost';  // Remplace par ton hôte
-    private static $dbname = 'projetserveur';  // Remplace par le nom de ta base
+   // private static $dbname = 'press_2024_v03';  // Remplace par le nom de ta base
+     private static $dbname = 'press_2024_v03';  // Remplace par le nom de ta base
     private static $user = 'root';  // Remplace par ton utilisateur MySQL
     private static $password = 'zack10';  // Remplace par ton mot de passe
     private static $pdo = null;
@@ -24,5 +25,3 @@ class Database {
 }
 
 ?>
-
-

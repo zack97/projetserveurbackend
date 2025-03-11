@@ -1,13 +1,13 @@
 <?php
-// Start the session and check if the user is logged in
 session_start();
-require_once '../../app/models/User.php'; // Adjust the path based on your folder structure
+require_once '../../app/models/User.php'; 
 
 if (!isset($_SESSION['user'])) {
-    // If the user is not logged in, return an error response
     echo json_encode(['status' => 'error', 'message' => 'You must be logged in to add favorites.']);
     exit;
 }
+
+
 
 // Get the article ID from the POST request
 if (isset($_POST['article_id'])) {

@@ -37,19 +37,18 @@ if (!$article) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($article['title']); ?></title>
+    <title><?php echo htmlspecialchars($article['title_art']); ?></title>
 </head>
 <body>
     <div class="container mt-3">
-        <h1><?php echo htmlspecialchars($article['title']); ?></h1>
-        <p><small>Publié le <?php echo htmlspecialchars($article['published']); ?></small></p>
+        <h1><?php echo htmlspecialchars($article['title_art']); ?></h1>
+        <p><small>Publié le <?php echo htmlspecialchars($article['date_art']); ?></small></p>
 
-        <?php if (!empty($article['image'])) { ?>  
-            <img src="../.<?php echo htmlspecialchars($article['image']); ?>" alt="Image de l'article" class="img-fluid mb-3"> 
+        <?php if (!empty($article['image_art'])) { ?>  
+            <img src="<?php echo htmlspecialchars($article['image_art']); ?>" alt="Image de l'article" class="img-fluid mb-3"> 
         <?php } ?>
 
-        <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
-        <small>Source : <?php echo htmlspecialchars($article['source']); ?></small>
+        <p><?php echo nl2br(htmlspecialchars($article['content_art'])); ?></p>
 
     </div>
 
