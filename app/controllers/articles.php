@@ -21,7 +21,7 @@
                         <br><small>Published on <?php echo htmlspecialchars($article['published']); ?></small></br>
                     </div>
                     <?php if (!empty($article['image'])) { ?>
-                        <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="Article image" class="mr-2 image-size">
+                        <img src="../../database/press_media/" alt="Article image" class="mr-2 image-size">
                     <?php } ?>
                     <a href="single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
                         <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>

@@ -1,31 +1,27 @@
 <?php
 session_start();
 require_once './app/controllers/body.php';
-require_once './app/models/User.php'; // Inclure la classe User pour la gestion des utilisateurs
+require_once './app/models/User.php'; 
 
-// Initialiser la classe User
 $userModel = new User();
 
-// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
     echo "You must be logged in to view your favorites.";
     exit;
 }
 
-// Récupérer l'ID de l'utilisateur connecté
 $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
 generateHeader('./media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
 generatenav('./app/controllers/recherche.php');
 
-// Fonction pour afficher les articles favoris
 function favori($userId) {
     global $userModel;
 
-    // Charger les articles favoris de la base de données
-    $stmt = $userModel->getDb()->prepare("SELECT a.* FROM articles a 
-                                          JOIN favorites f ON a.id = f.article_id
+    $stmt = $userModel->getDb()->prepare("SELECT t_article.* 
+                                          FROM t_article
+                                          JOIN favorites f ON t_article.id_art = f.article_id
                                           WHERE f.user_id = :user_id");
     $stmt->execute([':user_id' => $userId]);
     $favoriteArticles = $stmt->fetchAll();
@@ -62,7 +58,6 @@ function favori($userId) {
     <?php
 }
 
-// Afficher les articles favoris de l'utilisateur
 favori($userId);
 
 generatefooter();

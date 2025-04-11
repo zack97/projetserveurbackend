@@ -3,39 +3,41 @@ session_start();
 require_once '../../app/models/User.php'; 
 
 if (!isset($_SESSION['user'])) {
-    echo json_encode(['status' => 'error', 'message' => 'You must be logged in to add favorites.']);
+    echo json_encode(['status' => 'error', 'message' => 'You must be logged in to view your favorites.']);
     exit;
 }
 
+$userId = $_SESSION['user']['id']; 
 
+try {
+    $pdo = Database::connect(); 
 
-// Get the article ID from the POST request
-if (isset($_POST['article_id'])) {
-    $articleId = $_POST['article_id'];
-    $userId = $_SESSION['user']['id']; // Assuming user ID is stored in the session
+    $stmt = $pdo->prepare("
+        SELECT t_article.*
+        FROM t_article
+        INNER JOIN favorites ON favorites.article_id = t_article.id
+        WHERE favorites.user_id = :user_id
+    ");
+    $stmt->execute([':user_id' => $userId]);
 
-    // Initialize the User model
-    $userModel = new User();
+    $favoriteArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Check if the article is already in the user's favorites
-    $stmt = $userModel->getDb()->prepare("SELECT COUNT(*) FROM favorites WHERE user_id = :user_id AND article_id = :article_id");
-    $stmt->execute([':user_id' => $userId, ':article_id' => $articleId]);
-    $count = $stmt->fetchColumn();
-
-    if ($count > 0) {
-        // Article is already in the favorites
-        echo json_encode(['status' => 'error', 'message' => 'This article is already in your favorites.']);
-    } else {
-        // Add the article to the favorites table
-        $stmt = $userModel->getDb()->prepare("INSERT INTO favorites (user_id, article_id) VALUES (:user_id, :article_id)");
-        if ($stmt->execute([':user_id' => $userId, ':article_id' => $articleId])) {
-            echo json_encode(['status' => 'success', 'message' => 'Article added to favorites.']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'An error occurred while adding to favorites.']);
+    if ($favoriteArticles) {
+        echo '<h2>Your Favorite Articles</h2>';
+        echo '<ul>';
+        foreach ($favoriteArticles as $article) {
+            echo '<li>';
+            echo '<strong>' . htmlspecialchars($article['title']) . '</strong><br>';
+            echo 'Published on: ' . htmlspecialchars($article['published']);
+            echo '<p>' . htmlspecialchars($article['content']) . '</p>';
+            echo '</li>';
         }
+        echo '</ul>';
+    } else {
+        echo '<p>No favorite articles found.</p>';
     }
-} else {
-    // If article_id is not provided, return an error
-    echo json_encode(['status' => 'error', 'message' => 'Article ID is required.']);
+} catch (PDOException $e) {
+    echo json_encode(['status' => 'error', 'message' => 'An error occurred while fetching favorite articles.']);
+    error_log($e->getMessage()); 
 }
 ?>

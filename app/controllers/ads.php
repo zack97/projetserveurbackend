@@ -1,9 +1,5 @@
 <?php
 
-/**************************
- * Ceci contient  toute la structure et le css, les fonctions de la publicité
- * 
- * ********************************************************************************** */
 
 
  function publicite()

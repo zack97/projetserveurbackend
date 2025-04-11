@@ -465,7 +465,7 @@ function foundarticle($articles) {
                                 <small>Publié le <?php echo htmlspecialchars($article['date_art'] ?? 'Date inconnue'); ?></small>
                             </div>
                             <?php if (!empty($article['image_art'])) { ?>
-                                <img src="<?php echo htmlspecialchars($article['image_art']); ?>" 
+                                <img src="../../database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" 
                                      alt="Image de l'article" class="mr-2 image-size">
                             <?php } ?>
                             <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">

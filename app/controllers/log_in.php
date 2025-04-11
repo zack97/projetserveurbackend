@@ -4,26 +4,21 @@ session_start();
 require_once '../models/User.php'; 
 require_once './body.php'; 
 
-// Initialiser la classe User
 $userModel = new User();
 
-// Vérifier si le formulaire de connexion a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-    $rememberMe = isset($_POST['remember']); // Option "Se souvenir de moi"
+    $rememberMe = isset($_POST['remember']); 
 
-    // Tenter la connexion via la classe User
     $loginResult = $userModel->login(['email' => $email, 'password' => $password]);
 
     if ($loginResult === true) {
-        // Si "Se souvenir de moi" est activé, créer un cookie
         if ($rememberMe) {
             $cookieValue = base64_encode($email . '|' . $password);
             setcookie('remember_me', $cookieValue, time() + 3600 * 24 * 3, '/'); // Durée : 3 jours
         }
 
-        // Redirection après connexion réussie
         header("Location: /index.php");
         exit();
     } else {
@@ -31,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Afficher la page de connexion
 generatehead('../../assets/css/main.css');
 generateHeader('../../media/news.jpg', '');
 generatenav('recherche.php');

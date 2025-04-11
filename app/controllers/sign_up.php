@@ -1,32 +1,24 @@
 <?php
-/**************************
- * Ce contrôleur contient la structure de la page de création de compte, en régroupant 
- * ses fonctions tout en définissant les valeurs des paramètres.
- ***************************/
+
 
 session_start();
 
 require_once './body.php';
-require_once '../models/User.php'; // Inclure la classe User
+require_once '../models/User.php';
 
-// Initialiser la classe User
 $userModel = new User();
 
-// Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $confirmPassword = trim($_POST['confirm-password']);
 
-    // Vérification des mots de passe
     if ($password !== $confirmPassword) {
         $errorMessage = "Passwords do not match.";
     } elseif ($userModel->isEmailTaken($email)) {
-        // Vérifier si l'email existe déjà
         $errorMessage = "Email is already taken.";
     } else {
-        // Enregistrer l'utilisateur
         $registrationSuccess = $userModel->register([
             'username' => $username,
             'email' => $email,
@@ -41,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Générer la structure de la page
 generatehead('../../assets/css/main.css');
 generateHeader('../../media/news.jpg', 'log_in.php');
 generatenav('recherche.php');

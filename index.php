@@ -1,9 +1,4 @@
 <?php 
-/**************************
- * Ce controller contient  toute la structure de la page d'accueil en régroupant ses fonctions un après l'autre
- * tout en définissant les valeurs des paramètres 
- * 
- * ********************************************************************************** */
 
 
 session_start(); 
