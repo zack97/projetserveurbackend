@@ -412,11 +412,11 @@ function generateboottraap(){
 
 
     ?>
-    <div class="container mt-3">
+    <div class="rechecheContent">
         <h1 class="text-center">Search Articles</h1>
         <form method="POST" action="">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="readingTimeMin">Minimum Reading Time (en minutes)</label>
                     <input 
                         type="range" 
@@ -429,7 +429,7 @@ function generateboottraap(){
                         oninput="document.getElementById('minTimeValue').textContent = this.value">
                     <small>Valeur : <span id="minTimeValue">10</span> minutes</small>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="readingTimeMax">Maximum Reading Time(en minutes)</label>
                     <input 
                         type="range" 
@@ -514,16 +514,16 @@ function rechercheArticles($pdo) {
 
 function foundarticle($articles) {
     ?>
-    <div class="container mt-3">
+    <div class="found_content">
         <div class="row">
-            <div class="col-12">
-                <h1 class="text-center text-md-left">Résultats de la Recherche</h1>
+            <div>
+                <h1 class="text-center text-md-left">Articles Found </h1>
             </div>
         </div>
 
         <div class="contenu">
             <div class="row">
-                <div class="col-md-12">
+                <div class="">
                     <?php foreach ($articles as $article) { 
                         $fullContent = htmlspecialchars($article['content_art']);
                         $words = explode(' ', strip_tags($article['content_art']));
