@@ -524,7 +524,11 @@ function foundarticle($articles) {
         <div class="contenu">
             <div class="row">
                 <div class="col-md-12">
-                    <?php foreach ($articles as $article) { ?>
+                    <?php foreach ($articles as $article) { 
+                        $fullContent = htmlspecialchars($article['content_art']);
+                        $words = explode(' ', strip_tags($article['content_art']));
+                        $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
+                        ?>  
                         <article class="mb-3 border-bottom pb-3">
                             <div>
                                 <small>Publié le <?php echo htmlspecialchars($article['date_art'] ?? 'Date inconnue'); ?></small>
@@ -536,7 +540,15 @@ function foundarticle($articles) {
                             <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
                                 <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                             </a>
-                            <p><?php echo htmlspecialchars($article['content_art']); ?></p>
+                            <div class="article-content" style="margin-bottom: 1rem;">
+                                <p>
+                                    <span class="short-content"><?php echo $shortContent; ?></span>
+                                    <span class="full-content" style="display: none;"><?php echo $fullContent; ?></span>
+                                </p>
+                                <button class="toggle-btn btn btn-sm btn-primary" onclick="toggleContent(this)">
+                                    Show more
+                                </button>
+                            </div>
                             <div>Temps de lecture : 
                                 <strong><?php echo htmlspecialchars($article['readtime_art']); ?> minutes</strong>
                             </div>
@@ -546,6 +558,21 @@ function foundarticle($articles) {
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleContent(button) {
+            const container = button.closest('.article-content');
+            const shortContent = container.querySelector('.short-content');
+            const fullContent = container.querySelector('.full-content');
+
+            const isShortVisible = shortContent.style.display !== 'none';
+
+            shortContent.style.display = isShortVisible ? 'none' : 'inline';
+            fullContent.style.display = isShortVisible ? 'inline' : 'none';
+            button.textContent = isShortVisible ? 'Show less' : 'Show more';
+        }
+
+    </script>
     <?php
 }
 ?>
