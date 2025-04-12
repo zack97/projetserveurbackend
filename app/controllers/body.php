@@ -21,6 +21,7 @@ function generatehead($cssPath=''){ ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../assets/css/main.css">
   </head>
+  <script src="../../assets/js/spa.js"></script>
   <body>
 <?php
 }
@@ -42,13 +43,14 @@ function generatehead($cssPath=''){ ?>
  * *************************************************** */
 function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
     ?>
-    <header class="bg-light py-3">
+    <header class="bg-light py-3" >
         <div class="container">
             <div class="row align-items-center header-ul">
                 <div class="col-md-3 text-center text-md-left">
-                    <a href="../../index.php">
+                    <a href="../../index.php" >
                         <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
                     </a>
+
                 </div>
                 <div class="col-md-9 text-center text-md-right">
                     <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0">
@@ -409,7 +411,7 @@ function generateboottraap(){
 
  function rechercheformulaire() {
     require_once __DIR__ . '/../../config/database.php';
-
+   
 
     ?>
     <div class="rechecheContent">
@@ -443,7 +445,7 @@ function generateboottraap(){
                     <small>Valeur : <span id="maxTimeValue">60</span> minutes</small>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary ajax-btn" >Search</button>
         </form>
     </div>
     <?php

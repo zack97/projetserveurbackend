@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 generatehead('../../assets/css/main.css');
-generateHeader('../../media/news.jpg', '');
+generateHeader('../../database/press_media/media/news.jpg', '');
 generatenav('recherche.php');
 ?>
 

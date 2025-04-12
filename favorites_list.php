@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
-generateHeader('./media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
+generateHeader('./media/news.jpg', './app/controllers/log_in.php', './app/controllers/logout.php', './favorites_list.php');
 generatenav('./app/controllers/recherche.php');
 
 function favori($userId) {
@@ -36,11 +36,11 @@ function favori($userId) {
         <h1>Your Favorite Articles</h1>
         
         <?php foreach ($favoriteArticles as $article) {
-                $fullContent = htmlspecialchars($article['content_art']);
-                $words = explode(' ', strip_tags($article['content_art']));
-                $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
-                ?>  
-            <article class="mb-3">
+            $fullContent = htmlspecialchars($article['content_art']);
+            $words = explode(' ', strip_tags($article['content_art']));
+            $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
+        ?>  
+            <article class="mb-3" id="favorite-<?php echo htmlspecialchars($article['id_art']); ?>">
                 <div>
                     <small>Published on <?php echo htmlspecialchars($article['date_art']); ?></small>
                 </div>
@@ -59,7 +59,6 @@ function favori($userId) {
                         Show more
                     </button>
                 </div>
-               
                 <form action="./remove_favorite.php" method="POST" style="display:inline;">
                     <input type="hidden" name="article_id" value="<?php echo htmlspecialchars($article['id_art']); ?>">
                     <button type="submit" class="btn btn-sm btn-danger">Remove from favorites</button>
@@ -67,7 +66,7 @@ function favori($userId) {
             </article>
         <?php } ?>
     </div> 
-    
+
     <script>
         function toggleContent(button) {
             const container = button.closest('.article-content');
@@ -83,7 +82,6 @@ function favori($userId) {
 
     </script>
     <?php
-   
 }
 
 favori($userId);

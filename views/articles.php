@@ -71,7 +71,8 @@
 
 <!-- ✅ JS scripts -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function (event) {
+        event.preventDefault(); 
         const alertPlaceholder = document.getElementById('alertPlaceholder');
 
         function showAlert(message, type) {
