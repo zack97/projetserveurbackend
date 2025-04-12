@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const content = document.querySelector("#content"); // Sélectionne #content
         if (content) {
           content.innerHTML = html; // Mise à jour du contenu
-          window.history.pushState(null, "", url); // Met à jour l'URL dans la barre d'adresse
+          window.history.pushState(null, "", url);
         }
       })
       .catch((err) => {
@@ -18,34 +18,29 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Gérer les clics sur les liens et les boutons
   document.body.addEventListener("click", function (e) {
-    // Si c'est un lien
     const link = e.target.closest("a");
     if (link && !link.classList.contains("no-ajax")) {
-      // Ne pas intercepter si la classe 'no-ajax' est présente
-      e.preventDefault(); // Empêche le comportement par défaut
-      const url = link.getAttribute("href"); // Récupère l'URL
-      loadPage(url); // Charge la page via AJAX
+      e.preventDefault();
+      const url = link.getAttribute("href");
+      loadPage(url);
     }
 
-    // Si c'est un bouton
     const button = e.target.closest("button");
     if (button && !button.classList.contains("no-ajax")) {
-      // Ne pas intercepter si la classe 'no-ajax' est présente
-      e.preventDefault(); // Empêche le comportement par défaut
+      e.preventDefault();
       const form = button.closest("form");
       if (form) {
-        const formData = new FormData(form); // Crée un objet FormData avec les données du formulaire
+        const formData = new FormData(form);
         fetch(form.action, {
           method: "POST",
-          body: formData, // Envoie les données du formulaire
+          body: formData,
         })
           .then((response) => response.text())
           .then((html) => {
             const content = document.querySelector("#content");
             if (content) {
-              content.innerHTML = html; // Met à jour le contenu
+              content.innerHTML = html;
             }
           })
           .catch((err) => {
@@ -55,8 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Gérer le bouton retour du navigateur
   window.addEventListener("popstate", function () {
-    loadPage(location.pathname); // Recharger la page correspondant à l'URL dans l'historique
+    loadPage(location.pathname);
   });
 });
