@@ -16,7 +16,9 @@ function generatehead($cssPath=''){ ?>
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="<?php echo htmlspecialchars($cssPath)?>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
 <?php
@@ -37,9 +39,7 @@ function generatehead($cssPath=''){ ?>
  * Cette fonction contient le header du site.
  *               GENERATEHEADER()
  * *************************************************** */
-
-
-function generateHeader($logoPath = '', $loginPath = '', $logoutaction='', $favoritesPath='') {
+function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
     ?>
     <header class="bg-light py-3">
         <div class="container">
@@ -52,18 +52,42 @@ function generateHeader($logoPath = '', $loginPath = '', $logoutaction='', $favo
                 <div class="col-md-9 text-center text-md-right">
                     <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0">
                         <?php if (isset($_SESSION['user'])): ?>
-                            <!-- Si l'utilisateur est connecté -->
                             <li class="mr-md-3">
                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
                             </li>
-                            <li class="mr-md-3">| Welcome - <span class="text-success"><?php echo htmlspecialchars($_SESSION['user']['username']); ?></span></li>
+
+                            <!-- Greeting -->
                             <li class="mr-md-3">
-                                <form action="<?php echo htmlspecialchars($logoutaction)?>" method="POST">
+                                <span class="text-success">
+                                    <?php 
+                                    echo ($_SESSION['user']['is_admin'] == 1) 
+                                        ? "Administrator: " . htmlspecialchars($_SESSION['user']['username']) 
+                                        : "Valued User: " . htmlspecialchars($_SESSION['user']['username']);
+                                    ?>
+                                </span>
+                            </li>
+
+                            <!-- Profile Image + Upload & View Options -->
+                            <li class="mr-md-3 d-flex align-items-center">
+                                <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                                    <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
+                                         alt="Profile Image" 
+                                         class="profile-img" 
+                                         style="width: 40px; height: 40px; border-radius: 50%;"/>
+                                </a>
+                                <!-- View full image -->
+                                <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
+                                    <i class="fas fa-eye text-primary"></i>
+                                </a>
+                            </li>
+
+                            <!-- Logout -->
+                            <li class="mr-md-3">
+                                <form action="<?php echo htmlspecialchars($logoutaction) ?>" method="POST">
                                     <button type="submit" class="btn btn-danger">Log Out</button>
                                 </form>
                             </li>
                         <?php else: ?>
-                            <!-- Si l'utilisateur n'est pas connecté -->
                             <li class="mr-md-3">Questions? +1 (202) 335-3939</li>
                             <li class="mr-md-3">Contact</li>
                             <li class="mr-md-3">
@@ -75,9 +99,45 @@ function generateHeader($logoPath = '', $loginPath = '', $logoutaction='', $favo
             </div>
         </div>
     </header>
-    <?php
-}
 
+    <!-- Modal for updating the profile image -->
+    <?php if (isset($_SESSION['user'])): ?>
+        <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="profileImageModalLabel">Update Profile Image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="../../app/controllers/upload_profile_image.php" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="profileImage">Choose a new profile image:</label>
+                                <input type="file" name="profile_image" id="profileImage" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Image</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for viewing the full profile image -->
+        <div class="modal fade" id="viewProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center p-4">
+                        <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
+                             alt="Full Profile Image" 
+                             class="img-fluid rounded"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif;
+}
 
 
 

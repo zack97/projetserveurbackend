@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 
 require_once './body.php';
@@ -13,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $confirmPassword = trim($_POST['confirm-password']);
+    $isAdmin = isset($_POST['is_admin']);  // Si l'utilisateur est un admin, on récupère cette valeur
 
     if ($password !== $confirmPassword) {
         $errorMessage = "Passwords do not match.";
@@ -23,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'username' => $username,
             'email' => $email,
             'password' => $password,
+            'is_admin' => $isAdmin,  // Passer cette valeur lors de l'enregistrement
         ]);
 
         if ($registrationSuccess) {
@@ -65,6 +65,14 @@ generatenav('recherche.php');
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
             </div>
+
+            <!-- Option pour définir un utilisateur comme admin -->
+            <div class="form-group">
+                <label for="is_admin">
+                    <input type="checkbox" id="is_admin" name="is_admin"> Register as Admin
+                </label>
+            </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
