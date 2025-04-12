@@ -17,16 +17,7 @@ generatehead('../assets/css/main.css'); // This should work for the first load
     
     // Dynamically load articles and reapply the CSS
     $controller = new ArticleController();
-    $controller->showArticles();
-
-    // After loading the articles, re-apply the CSS
-    echo "<script>
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = './assets/css/main.css?v=' + new Date().getTime(); // Cache busting
-        document.head.appendChild(link);
-    </script>";
-
+    $controller->showArticles(); 
     generatefooter();
     generateboottraap();
     ?>
