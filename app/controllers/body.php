@@ -62,8 +62,8 @@ function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $fa
                                 <span class="text-success">
                                     <?php 
                                     echo ($_SESSION['user']['is_admin'] == 1) 
-                                        ? "Administrator: " . htmlspecialchars($_SESSION['user']['username']) 
-                                        : "Valued User: " . htmlspecialchars($_SESSION['user']['username']);
+                                        ? "Admin - " . htmlspecialchars($_SESSION['user']['username']) 
+                                        : "Client - " . htmlspecialchars($_SESSION['user']['username']);
                                     ?>
                                 </span>
                             </li>
