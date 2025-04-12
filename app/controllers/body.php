@@ -19,6 +19,7 @@ function generatehead($cssPath=''){ ?>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="<?php echo htmlspecialchars($cssPath)?>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../assets/css/main.css">
   </head>
   <body>
 <?php
@@ -69,12 +70,16 @@ function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $fa
 
                             <!-- Profile Image + Upload & View Options -->
                             <li class="mr-md-3 d-flex align-items-center">
-                                <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                            <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                               <?php if(($_SESSION['user']['profile_image'])):?>
                                     <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
                                          alt="Profile Image" 
                                          class="profile-img" 
-                                         style="width: 40px; height: 40px; border-radius: 50%;"/>
-                                </a>
+                                         style="width: 50px; height:45px; border-radius: 50%;"/>
+                                 <?php else: ?>
+                                    <i class="fa-solid fa-user"></i>
+                                    <?php endif; ?>
+                            </a>
                                 <!-- View full image -->
                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
                                     <i class="fas fa-eye text-primary"></i>

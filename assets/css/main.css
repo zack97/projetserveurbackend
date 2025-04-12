@@ -46,6 +46,11 @@ header .lead {
   margin: 0;
 }
 
+.art_image {
+  width: 100%;
+  height: 100%;
+}
+
 /***/
 
 .remember {

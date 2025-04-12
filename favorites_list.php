@@ -34,28 +34,56 @@ function favori($userId) {
     ?>
     <div class="container mt-3">
         <h1>Your Favorite Articles</h1>
-        <?php foreach ($favoriteArticles as $article) { ?>
+        
+        <?php foreach ($favoriteArticles as $article) {
+                $fullContent = htmlspecialchars($article['content_art']);
+                $words = explode(' ', strip_tags($article['content_art']));
+                $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
+                ?>  
             <article class="mb-3">
                 <div>
-                    <small>Published on <?php echo htmlspecialchars($article['published']); ?></small>
+                    <small>Published on <?php echo htmlspecialchars($article['date_art']); ?></small>
                 </div>
-                <?php if (!empty($article['image'])) { ?>
-                    <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="image" class="mr-2 image-size">
+                <?php if (!empty($article['image_art'])) { ?>
+                    <img src="./database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" alt="image">
                 <?php } ?>
-                <a href="View/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
-                    <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>
+                <a href="View/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                    <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                 </a>
-                <p><?php echo htmlspecialchars($article['content']); ?></p>
-                <small>Source: <?php echo htmlspecialchars($article['source']); ?></small>
-
+                <div class="article-content" style="margin-bottom: 1rem;">
+                    <p>
+                        <span class="short-content"><?php echo $shortContent; ?></span>
+                        <span class="full-content" style="display: none;"><?php echo $fullContent; ?></span>
+                    </p>
+                    <button class="toggle-btn btn btn-sm btn-primary" onclick="toggleContent(this)">
+                        Show more
+                    </button>
+                </div>
+               
                 <form action="./remove_favorite.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="article_id" value="<?php echo htmlspecialchars($article['id']); ?>">
+                    <input type="hidden" name="article_id" value="<?php echo htmlspecialchars($article['id_art']); ?>">
                     <button type="submit" class="btn btn-sm btn-danger">Remove from favorites</button>
                 </form>
             </article>
         <?php } ?>
-    </div>
+    </div> 
+    
+    <script>
+        function toggleContent(button) {
+            const container = button.closest('.article-content');
+            const shortContent = container.querySelector('.short-content');
+            const fullContent = container.querySelector('.full-content');
+
+            const isShortVisible = shortContent.style.display !== 'none';
+
+            shortContent.style.display = isShortVisible ? 'none' : 'inline';
+            fullContent.style.display = isShortVisible ? 'inline' : 'none';
+            button.textContent = isShortVisible ? 'Show less' : 'Show more';
+        }
+
+    </script>
     <?php
+   
 }
 
 favori($userId);
