@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 generatehead('../../assets/css/main.css');
-generateHeader('../../media/news.jpg', 'log_in.php');
+generateHeader('../../database/press_media/media/news.jpg', 'log_in.php');
 generatenav('recherche.php');
 ?>
 

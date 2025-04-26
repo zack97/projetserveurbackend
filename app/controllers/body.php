@@ -42,7 +42,7 @@ function generatehead($cssPath=''){ ?>
  * *************************************************** */
 function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
     ?>
-    <header class="bg-light py-3">
+    <header class="bg-light py-4">
         <div class="container">
             <div class="row align-items-center header-ul">
                 <div class="col-md-3 text-center text-md-left">

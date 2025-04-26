@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
-generateHeader('./media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
+generateHeader('./database/press_media/media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
 generatenav('./app/controllers/recherche.php');
 
 function favori($userId) {
