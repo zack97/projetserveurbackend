@@ -63,6 +63,6 @@ generatenav('recherche.php');
 </div>
 
 <?php
-generatefooter('../media/res.jpg');
+generatefooter('../../database/press_media/media/res.jpg');
 generateboottraap();
 ?>

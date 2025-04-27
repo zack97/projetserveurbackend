@@ -41,13 +41,13 @@ function generatehead($cssPath=''){ ?>
  * *************************************************** */
 
 
- function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
+ function generateHeader($indexPath='',$logoPath = '', $admin='',$client='', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
      ?>
      <header class="py-4">
          <div class="container">
              <div class="row align-items-center header-ul">
                  <div class="col-md-3 text-center text-md-left">
-                     <a href="../../index.php">
+                     <a href="<?php echo htmlspecialchars($indexPath) ?>">
                          <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
                      </a>
                  </div>
@@ -66,13 +66,22 @@ function generatehead($cssPath=''){ ?>
                                      ?>
                                  </span>
                              </li>
+                             <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+                                <li class="mr-md-3">
+                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning">Manage Users</a>
+                                </li>
+                                <li class="mr-md-3">
+                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info">Manage Articles</a>
+                                </li>
+                            <?php endif; ?>
+
                              <li class="mr-md-3 d-flex align-items-center">
                                  <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
                                      <?php if (!empty($_SESSION['user']['profile_image'])): ?>
                                          <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
                                               alt="Profile Image" 
                                               class="profile-img" 
-                                              style="width: 50px; height:45px; border-radius: 50%;"/>
+                                              style="width: 25px; height:25px; border-radius: 50%;"/>
                                      <?php else: ?>
                                          <i class="fa-solid fa-user"></i>
                                      <?php endif; ?>
