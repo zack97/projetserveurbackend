@@ -16,9 +16,9 @@ function generatehead($cssPath=''){ ?>
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome CDN -->    
     <link rel="stylesheet" href="<?php echo htmlspecialchars($cssPath)?>" />
-    <link rel="stylesheet" href="../../assets/css/article.css">
+     <link rel="stylesheet" href="../../assets/css/article.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
   <body  id="site-header">
 <?php
@@ -97,7 +97,7 @@ function generatehead($cssPath=''){ ?>
                          <li class="mr-md-3">
                              <div class="dropdown">
                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     Change Background
+                                     Theme
                                  </button>
                                  <div class="dropdown-menu" aria-labelledby="themeDropdown">
                                      <a class="dropdown-item" href="#" id="light-theme">Light Theme</a>
@@ -117,7 +117,7 @@ function generatehead($cssPath=''){ ?>
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h5 class="modal-title" id="profileImageModalLabel">Update Profile Image</h5>
+                         <h5 class="modal-title" id="profileImageModalLabel" style="color: #333;">Update Profile Image</h5>
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">&times;</span>
                          </button>

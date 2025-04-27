@@ -361,3 +361,68 @@ img[src="/site/media/resco.jpg"] {
     margin-left: 0px;
   }
 }
+
+.container1 {
+  display: table;
+  width: 90%;
+  margin: 30px auto;
+  border-collapse: collapse;
+}
+
+.container1 h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: bisque;
+  font-size: 30px;
+}
+
+.container1 .header-row {
+  display: table-row;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #ccc;
+}
+
+.container1 .header-row > div {
+  display: table-cell;
+  padding: 15px;
+  text-align: center;
+}
+
+.container1 article {
+  display: table-row;
+  border-bottom: 1px solid #ddd;
+}
+
+.container1 article > div {
+  display: table-cell;
+  padding: 15px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.container1 img {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.container1 h3 {
+  font-size: 16px;
+  margin: 0;
+  color: #333;
+}
+
+.container1 small {
+  font-size: 12px;
+  color: gray;
+}
+
+.container1 p {
+  font-size: 14px;
+  color: #555;
+}
+
+.container1 button {
+  margin-top: 5px;
+}

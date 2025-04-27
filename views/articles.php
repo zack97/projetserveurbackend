@@ -6,7 +6,12 @@
             <div class="left">
                 <h2>Dates and Titles of Articles</h2>
                 <ul>
-                    <?php foreach (array_merge($latestArticles, $featuredArticles) as $article) { ?>
+                    <?php 
+                    // Merge the arrays and limit to 6 articles
+                    $mergedArticles = array_merge($latestArticles, $featuredArticles);
+                    $limitedArticles = array_slice($mergedArticles, 1, 10); // Get only the first 6 articles
+                    
+                    foreach ($limitedArticles as $article) { ?>
                         <li>
                             <strong><?php echo htmlspecialchars($article['published']); ?></strong> -
                             <a href="../app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
@@ -20,7 +25,10 @@
             <div class="right">
                 <h2>Latest Press Releases</h2>
 
-                <?php foreach ($latestArticles as $article) { 
+                <?php 
+                // Limit to 6 articles from latestArticles array
+                $limitedLatestArticles = array_slice($latestArticles, 1, 10);
+                foreach ($limitedLatestArticles as $article) { 
                     $fullContent = htmlspecialchars($article['content']);
                     $words = explode(' ', strip_tags($article['content']));
                     $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
@@ -57,6 +65,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- ✅ JS scripts -->
 <script>
