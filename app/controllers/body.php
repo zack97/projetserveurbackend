@@ -18,9 +18,8 @@ function generatehead($cssPath=''){ ?>
     />
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="<?php echo htmlspecialchars($cssPath)?>" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../assets/css/main.css">
-  </head>
+    <link rel="stylesheet" href="../../assets/css/article.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
   <body>
 <?php
 }
@@ -70,16 +69,17 @@ function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $fa
 
                             <!-- Profile Image + Upload & View Options -->
                             <li class="mr-md-3 d-flex align-items-center">
-                            <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
-                               <?php if(($_SESSION['user']['profile_image'])):?>
-                                    <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
-                                         alt="Profile Image" 
-                                         class="profile-img" 
-                                         style="width: 50px; height:45px; border-radius: 50%;"/>
-                                 <?php else: ?>
-                                    <i class="fa-solid fa-user"></i>
+                                <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                                    <?php if (!empty($_SESSION['user']['profile_image'])): ?>
+                                        <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
+                                            alt="Profile Image" 
+                                            class="profile-img" 
+                                            style="width: 50px; height:45px; border-radius: 50%;"/>
+                                    <?php else: ?>
+                                        <i class="fa-solid fa-user"></i>
                                     <?php endif; ?>
-                            </a>
+                                </a>
+
                                 <!-- View full image -->
                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
                                     <i class="fas fa-eye text-primary"></i>
@@ -278,7 +278,7 @@ function generatenav($recherchePath=''){
  *               GENERATEHEADER()
  * *************************************************** */
 
-function generatefooter($iconImg='./View/media/res.jpg'){
+function generatefooter(){
     ?>
      <footer class="footer">
           <div class="container">
@@ -342,7 +342,7 @@ function generatefooter($iconImg='./View/media/res.jpg'){
                           <li>Contact</li>
                           <li>Follow EIN Presswire</li>
                       </ul>
-                      <img src="<?php echo htmlspecialchars($iconImg)?>" alt="icone_res" class="img-fluid">
+                      <img src="../../database/press_media/media/news.jpg" alt="icone_res" class="img-fluid">
                   </div>
               </div>
               <div class="row sous">
@@ -412,11 +412,11 @@ function generateboottraap(){
 
 
     ?>
-    <div class="container mt-3">
+    <div class="rechecheContent">
         <h1 class="text-center">Search Articles</h1>
         <form method="POST" action="">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="readingTimeMin">Minimum Reading Time (en minutes)</label>
                     <input 
                         type="range" 
@@ -429,7 +429,7 @@ function generateboottraap(){
                         oninput="document.getElementById('minTimeValue').textContent = this.value">
                     <small>Valeur : <span id="minTimeValue">10</span> minutes</small>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="readingTimeMax">Maximum Reading Time(en minutes)</label>
                     <input 
                         type="range" 
@@ -514,16 +514,16 @@ function rechercheArticles($pdo) {
 
 function foundarticle($articles) {
     ?>
-    <div class="container mt-3">
+    <div class="found_content">
         <div class="row">
-            <div class="col-12">
-                <h1 class="text-center text-md-left">Résultats de la Recherche</h1>
+            <div>
+                <h1 class="text-center text-md-left">Articles Found </h1>
             </div>
         </div>
 
         <div class="contenu">
             <div class="row">
-                <div class="col-md-12">
+                <div class="">
                     <?php foreach ($articles as $article) { 
                         $fullContent = htmlspecialchars($article['content_art']);
                         $words = explode(' ', strip_tags($article['content_art']));
