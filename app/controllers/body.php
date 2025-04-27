@@ -20,7 +20,7 @@ function generatehead($cssPath=''){ ?>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($cssPath)?>" />
     <link rel="stylesheet" href="../../assets/css/article.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
-  <body>
+  <body  id="site-header">
 <?php
 }
 
@@ -39,112 +39,172 @@ function generatehead($cssPath=''){ ?>
  * Cette fonction contient le header du site.
  *               GENERATEHEADER()
  * *************************************************** */
-function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
-    ?>
-    <header class="bg-light py-4">
-        <div class="container">
-            <div class="row align-items-center header-ul">
-                <div class="col-md-3 text-center text-md-left">
-                    <a href="../../index.php">
-                        <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
-                    </a>
-                </div>
-                <div class="col-md-9 text-center text-md-right">
-                    <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0">
-                        <?php if (isset($_SESSION['user'])): ?>
-                            <li class="mr-md-3">
-                                <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
-                            </li>
 
-                            <!-- Greeting -->
-                            <li class="mr-md-3">
-                                <span class="text-success">
-                                    <?php 
-                                    echo ($_SESSION['user']['is_admin'] == 1) 
-                                        ? "Admin - " . htmlspecialchars($_SESSION['user']['username']) 
-                                        : "Client - " . htmlspecialchars($_SESSION['user']['username']);
-                                    ?>
-                                </span>
-                            </li>
 
-                            <!-- Profile Image + Upload & View Options -->
-                            <li class="mr-md-3 d-flex align-items-center">
-                                <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
-                                    <?php if (!empty($_SESSION['user']['profile_image'])): ?>
-                                        <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
-                                            alt="Profile Image" 
-                                            class="profile-img" 
-                                            style="width: 50px; height:45px; border-radius: 50%;"/>
-                                    <?php else: ?>
-                                        <i class="fa-solid fa-user"></i>
-                                    <?php endif; ?>
-                                </a>
-
-                                <!-- View full image -->
-                                <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
-                                    <i class="fas fa-eye text-primary"></i>
-                                </a>
-                            </li>
-
-                            <!-- Logout -->
-                            <li class="mr-md-3">
-                                <form action="<?php echo htmlspecialchars($logoutaction) ?>" method="POST">
-                                    <button type="submit" class="btn btn-danger">Log Out</button>
-                                </form>
-                            </li>
+ function generateHeader($logoPath = '', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
+     ?>
+     <header class="py-4">
+         <div class="container">
+             <div class="row align-items-center header-ul">
+                 <div class="col-md-3 text-center text-md-left">
+                     <a href="../../index.php">
+                         <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
+                     </a>
+                 </div>
+                 <div class="col-md-9 text-center text-md-right">
+                     <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
+                         <?php if (isset($_SESSION['user'])): ?>
+                             <li class="mr-md-3">
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
+                             </li>
+                             <li class="mr-md-3">
+                                 <span class="text-success">
+                                     <?php 
+                                     echo ($_SESSION['user']['is_admin'] == 1) 
+                                         ? "Admin - " . htmlspecialchars($_SESSION['user']['username']) 
+                                         : "Client - " . htmlspecialchars($_SESSION['user']['username']);
+                                     ?>
+                                 </span>
+                             </li>
+                             <li class="mr-md-3 d-flex align-items-center">
+                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                                     <?php if (!empty($_SESSION['user']['profile_image'])): ?>
+                                         <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
+                                              alt="Profile Image" 
+                                              class="profile-img" 
+                                              style="width: 50px; height:45px; border-radius: 50%;"/>
+                                     <?php else: ?>
+                                         <i class="fa-solid fa-user"></i>
+                                     <?php endif; ?>
+                                 </a>
+                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
+                                     <i class="fas fa-eye text-primary"></i>
+                                 </a>
+                             </li>
+                             <li class="mr-md-3">
+                                 <form action="<?php echo htmlspecialchars($logoutaction) ?>" method="POST">
+                                     <button type="submit" class="btn btn-danger">Log Out</button>
+                                 </form>
+                             </li>
                         <?php else: ?>
-                            <li class="mr-md-3">Questions? +1 (202) 335-3939</li>
-                            <li class="mr-md-3">Contact</li>
-                            <li class="mr-md-3">
-                                <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary">Log In</a>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
+                             <li class="mr-md-3" style="color: #333;">Questions? +1 (202) 335-3939</li>
+                             <li class="mr-md-3" style="color: #333;">Contact</li>
+                             <li class="mr-md-3">
+                                 <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary">Log In</a>
+                             </li>
+                         <?php endif; ?>
+                         <!-- Dropdown for background change -->
+                         <li class="mr-md-3">
+                             <div class="dropdown">
+                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     Change Background
+                                 </button>
+                                 <div class="dropdown-menu" aria-labelledby="themeDropdown">
+                                     <a class="dropdown-item" href="#" id="light-theme">Light Theme</a>
+                                     <a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a>
+                                 </div>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
+     </header>
+ 
+     <!-- Modal for Profile Image -->
+     <?php if (isset($_SESSION['user'])): ?>
+         <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="profileImageModalLabel">Update Profile Image</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         <form action="../../app/controllers/upload_profile_image.php" method="POST" enctype="multipart/form-data">
+                             <div class="form-group">
+                                 <label for="profileImage">Choose a new profile image:</label>
+                                 <input type="file" name="profile_image" id="profileImage" class="form-control" required />
+                             </div>
+                             <button type="submit" class="btn btn-primary">Upload Image</button>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+ 
+         <div class="modal fade" id="viewProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileImageModalLabel" aria-hidden="true">
+             <div class="modal-dialog modal-dialog-centered" role="document">
+                 <div class="modal-content">
+                     <div class="modal-body text-center p-4">
+                         <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
+                              alt="Full Profile Image" 
+                              class="img-fluid rounded"/>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     <?php endif; ?>
+ 
+     <script>
+     // Check if the theme cookie exists on page load
+     document.addEventListener('DOMContentLoaded', function() {
+         const body = document.body;
+         const headerLinks = document.getElementById('header-links');
+         const theme = getCookie("theme") || "light"; // Default to light theme if no cookie exists
+ 
+         // Apply theme based on the cookie value
+         if (theme === "dark") {
+             body.style.backgroundColor = '#343a40';
+             body.style.color = '#f8f9fa';
+             
+             headerLinks.classList.remove('text-dark');
+             headerLinks.classList.add('text-light');
+         }
+ 
+         // Event listener for changing the theme
+         document.getElementById('light-theme').addEventListener('click', function() {
+             // Switch to light theme
+             body.style.backgroundColor = '#ffffff';
+             body.style.color = '#212529';
+             headerLinks.classList.remove('text-light');
+             headerLinks.classList.add('text-dark');
+             setCookie("theme", "light", 30); // Save theme preference in cookie for 30 days
+         });
+ 
+         document.getElementById('dark-theme').addEventListener('click', function() {
+             // Switch to dark theme
+             body.style.backgroundColor = '#343a40';
+             body.style.color = '#f8f9fa';
+             headerLinks.classList.remove('text-dark');
+             headerLinks.classList.add('text-light');
+             setCookie("theme", "dark", 30); // Save theme preference in cookie for 30 days
+         });
+     });
+ 
+     // Helper functions for cookie handling
+     function setCookie(name, value, days) {
+         const expires = new Date();
+         expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+         document.cookie = name + "=" + value + ";expires=" + expires.toUTCString() + ";path=/";
+     }
+ 
+     function getCookie(name) {
+         const nameEQ = name + "=";
+         const ca = document.cookie.split(';');
+         for (let i = 0; i < ca.length; i++) {
+             let c = ca[i].trim();
+             if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+         }
+         return null;
+     }
+     </script>
+ <?php
+ }
 
-    <!-- Modal for updating the profile image -->
-    <?php if (isset($_SESSION['user'])): ?>
-        <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileImageModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="profileImageModalLabel">Update Profile Image</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="../../app/controllers/upload_profile_image.php" method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="profileImage">Choose a new profile image:</label>
-                                <input type="file" name="profile_image" id="profileImage" class="form-control" required />
-                            </div>
-                            <button type="submit" class="btn btn-primary">Upload Image</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for viewing the full profile image -->
-        <div class="modal fade" id="viewProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileImageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body text-center p-4">
-                        <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
-                             alt="Full Profile Image" 
-                             class="img-fluid rounded"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif;
-}
-
-
+ 
 
 
 /***************************************************************************************** */
@@ -412,7 +472,7 @@ function generateboottraap(){
 
 
     ?>
-    <div class="rechecheContent">
+    <div class="rechecheContent" style="background-color: #fff;">
         <h1 class="text-center">Search Articles</h1>
         <form method="POST" action="">
             <div class="form-row">

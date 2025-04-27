@@ -47,7 +47,7 @@ function favori($userId) {
                 <?php if (!empty($article['image_art'])) { ?>
                     <img src="./database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" alt="image">
                 <?php } ?>
-                <a href="View/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                <a href="./app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
                     <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                 </a>
                 <div class="article-content" style="margin-bottom: 1rem;">
