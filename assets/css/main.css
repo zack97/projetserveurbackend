@@ -426,3 +426,29 @@ img[src="/site/media/resco.jpg"] {
 .container1 button {
   margin-top: 5px;
 }
+
+/* Style normal de l'article */
+article.mb-3 {
+  background-color: #ffffff; /* blanc par défaut */
+  color: #333333; /* texte foncé par défaut */
+  padding: 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Si le background est sombre */
+article.mb-3.bg-dark,
+.bg-dark article.mb-3 {
+  background-color: #343a40; /* gris foncé */
+  color: #ffffff; /* texte blanc */
+}
+
+article.mb-3.bg-dark a,
+.bg-dark article.mb-3 a {
+  color: #ffffff;
+}
+
+article.mb-3.bg-dark a:hover,
+.bg-dark article.mb-3 a:hover {
+  color: #00d1ff; /* couleur bleu clair au survol */
+}

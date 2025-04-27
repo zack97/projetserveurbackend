@@ -13,11 +13,13 @@ if (!isset($_SESSION['user'])) {
 $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
-generateHeader('./database/press_media/media/news.jpg', './views/controllers/log_in.php', './views/controllers/logout.php', './favorites_list.php');
+generateHeader('./database/press_media/media/news.jpg', './app/controllers/log_in.php', './app/controllers/logout.php', './favorites_list.php');
 generatenav('./app/controllers/recherche.php');
 
 function favori($userId) {
     global $userModel;
+    $isDark = isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark';
+
 
     $stmt = $userModel->getDb()->prepare("SELECT t_article.* 
                                           FROM t_article
@@ -32,7 +34,7 @@ function favori($userId) {
     }
 
     ?>
-    <div class="container1 mt-3">
+    <div class="container1 mt-3" style="color: #333; ">
         <h1>Favorite Articles</h1>
         
         <div class="header-row">
@@ -48,7 +50,7 @@ function favori($userId) {
         $words = explode(' ', strip_tags($article['content_art']));
         $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
     ?>  
-        <article class="mb-3">
+        <article class="mb-3" style=" <?php echo $isDark ? 'bg-dark' : ''; ?>"> 
             <div>
                 <small><?php echo htmlspecialchars($article['date_art']); ?></small>
             </div>
