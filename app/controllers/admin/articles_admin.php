@@ -2,6 +2,7 @@
 session_start();
 require_once '../../database/connection.php';
 
+
 if (!isset($_SESSION['user']) || $_SESSION['user']['is_admin'] != 1) {
     header('Location: ../../index.php');
     exit();

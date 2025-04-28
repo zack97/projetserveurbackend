@@ -11,7 +11,7 @@ require_once './body.php';
 
 
 generatehead('../../assets/css/main.css');
-generateHeader('../../database/press_media/media/news.jpg', 'log_in.php', 'logout.php','../../favorites_list.php');
+generateHeader('../../index.php','../../database/press_media/media/news.jpg','','', './log_in.php', './logout.php','../../favorites_list.php');
 generatenav('');
 ?>
 

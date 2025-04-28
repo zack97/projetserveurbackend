@@ -7,7 +7,7 @@ require_once "../models/ArticleModel.php";
 
 // Charger le CSS et le header
 generatehead('../../assets/css/main.css');
-generateHeader('../../database/press_media/media/news.jpg', 'log_in.php', 'logout.php','../../favorites_list.php');
+generateHeader('../../index.php','../../database/press_media/media/news.jpg', '','', './log_in.php', './logout.php','../../favorites_list.php');
 generatenav('recherche.php');
 
 // Récupérer l'ID de l'article depuis l'URL

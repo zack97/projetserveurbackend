@@ -83,7 +83,7 @@
              <img src="https://lirp.cdn-website.com/fbdae4c0/dms3rep/multi/opt/Newswire_SocialNetworkImage-1920w.png" alt="Ad Image">
              <h2>Real News Delivered!</h2>
              <p>Get the latest real news straight to your inbox!</p>
-             <button onclick="window.open('./View/controllers/recherche.php', '_blank')">Search More</button>
+             <button onclick="window.open('./app/controllers/recherche.php', '_blank')">Search More</button>
              <button onclick="closePopup()">Close</button>
          </div>
  
