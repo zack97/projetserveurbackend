@@ -573,6 +573,12 @@ article.mb-3.bg-dark a:hover,
   background-color: #c82333;
 }
 
+.article-img {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+}
+
 /* Responsive for mobile */
 @media (max-width: 768px) {
   .user_admin h1 {

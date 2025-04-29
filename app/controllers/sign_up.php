@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 generatehead('../../assets/css/main.css');
-generateHeader('../../index.php','../../database/press_media/media/news.jpg', '','', './log_in.php', './logout.php','../../favorites_list.php');
+generateHeader('../../index.php','../../database/press_media/media/news.jpg', './admin/users_admin.php','./admin/articles_admin.php', './log_in.php', './logout.php','../../favorites_list.php');
 generatenav('recherche.php');
 ?>
 
@@ -91,7 +91,7 @@ generatenav('recherche.php');
         </form>
         <div class="login-link">
             <p style="color: black;">Already have an account?</p>
-            <p><a href="log_in.php">Log in here</a>.</p>
+            <p><a href="log_in.php" class="ajax-link">Log in here</a>.</p>
         </div>
     </div>
 </div>

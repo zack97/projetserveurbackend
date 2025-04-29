@@ -47,7 +47,7 @@ function generatehead($cssPath=''){ ?>
          <div class="container">
              <div class="row align-items-center header-ul">
                  <div class="col-md-3 text-center text-md-left">
-                     <a href="<?php echo htmlspecialchars($indexPath) ?>">
+                     <a href="<?php echo htmlspecialchars($indexPath) ?>" class="ajax-link">
                          <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
                      </a>
                  </div>
@@ -55,7 +55,7 @@ function generatehead($cssPath=''){ ?>
                      <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
                          <?php if (isset($_SESSION['user'])): ?>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary ajax-link">Favorites</a>
                              </li>
                              <li class="mr-md-3">
                                  <span class="text-success">
@@ -67,16 +67,16 @@ function generatehead($cssPath=''){ ?>
                                  </span>
                              </li>
                              <?php if ($_SESSION['user']['is_admin'] == 1): ?>
-                                <li class="mr-md-3">
-                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning">Manage Users</a>
+                                <li class="mr-md-2">
+                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning ajax-link">Users</a>
                                 </li>
-                                <li class="mr-md-3">
-                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info">Manage Articles</a>
+                                <li class="mr-md-2">
+                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info ajax-link">Articles</a>
                                 </li>
                             <?php endif; ?>
 
                              <li class="mr-md-3 d-flex align-items-center">
-                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2 ajax-link">
                                      <?php if (!empty($_SESSION['user']['profile_image'])): ?>
                                          <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
                                               alt="Profile Image" 
@@ -86,7 +86,7 @@ function generatehead($cssPath=''){ ?>
                                          <i class="fa-solid fa-user"></i>
                                      <?php endif; ?>
                                  </a>
-                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
+                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image" class="ajax-link">
                                      <i class="fas fa-eye text-primary"></i>
                                  </a>
                              </li>
@@ -99,7 +99,7 @@ function generatehead($cssPath=''){ ?>
                              <li class="mr-md-3" style="color: #333;">Questions? +1 (202) 335-3939</li>
                              <li class="mr-md-3" style="color: #333;">Contact</li>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary">Log In</a>
+                                 <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary ajax-link">Log In</a>
                              </li>
                          <?php endif; ?>
                          <!-- Dropdown for background change -->
@@ -109,8 +109,8 @@ function generatehead($cssPath=''){ ?>
                                      Theme
                                  </button>
                                  <div class="dropdown-menu" aria-labelledby="themeDropdown">
-                                     <a class="dropdown-item" href="#" id="light-theme">Light Theme</a>
-                                     <a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a>
+                                     <a class="dropdown-item ajax-link" href="#" id="light-theme">Light Theme</a>
+                                     <a class="dropdown-item ajax-link" href="#" id="dark-theme">Dark Theme</a>
                                  </div>
                              </div>
                          </li>
@@ -121,42 +121,48 @@ function generatehead($cssPath=''){ ?>
      </header>
  
      <!-- Modal for Profile Image -->
-     <?php if (isset($_SESSION['user'])): ?>
-         <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileImageModalLabel" aria-hidden="true">
-             <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title" id="profileImageModalLabel" style="color: #333;">Update Profile Image</h5>
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
-                         </button>
-                     </div>
-                     <div class="modal-body">
-                         <form action="../../app/controllers/upload_profile_image.php" method="POST" enctype="multipart/form-data">
-                             <div class="form-group">
-                                 <label for="profileImage">Choose a new profile image:</label>
-                                 <input type="file" name="profile_image" id="profileImage" class="form-control" required />
-                             </div>
-                             <button type="submit" class="btn btn-primary">Upload Image</button>
-                         </form>
-                     </div>
-                 </div>
-             </div>
-         </div>
- 
-         <div class="modal fade" id="viewProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileImageModalLabel" aria-hidden="true">
-             <div class="modal-dialog modal-dialog-centered" role="document">
-                 <div class="modal-content">
-                     <div class="modal-body text-center p-4">
-                         <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
-                              alt="Full Profile Image" 
-                              class="img-fluid rounded"/>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     <?php endif; ?>
- 
+<?php if (isset($_SESSION['user'])): ?>
+    <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileImageModalLabel" style="color: #333;">Update Profile Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulaire pour uploader une nouvelle image -->
+                    <form action="../../app/controllers/upload_profile_image.php" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="profileImage">Choose a new profile image:</label>
+                            <input type="file" name="profile_image" id="profileImage" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Upload Image</button>
+                    </form>
+
+                    <!-- Formulaire pour supprimer l'image existante -->
+                    <form action="../../app/controllers/delete_profile_image.php" method="POST" onsubmit="return confirm('Are you sure you want to delete your profile image?');">
+                        <button type="submit" class="btn btn-danger">Delete Profile Image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="viewProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                    <img src="<?php echo isset($_SESSION['user']['profile_image']) && $_SESSION['user']['profile_image'] ? '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']) : 'path/to/default-profile.jpg'; ?>" 
+                         alt="Full Profile Image" 
+                         class="img-fluid rounded"/>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
      <script>
      // Check if the theme cookie exists on page load
      document.addEventListener('DOMContentLoaded', function() {
@@ -606,7 +612,7 @@ function foundarticle($articles) {
                                 <img src="../../database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" 
                                      alt="Image de l'article" class="mr-2 image-size">
                             <?php } ?>
-                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>" class="ajax-link">
                                 <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                             </a>
                             <div class="article-content" style="margin-bottom: 1rem;">

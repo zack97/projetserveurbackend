@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 $userId = $_SESSION['user']['id'];
 
 generatehead('../assets/css/main.css');
-generateHeader('./database/press_media/media/news.jpg', './app/controllers/log_in.php', './app/controllers/logout.php', './favorites_list.php');
+generateHeader('./index.php','./database/press_media/media/news.jpg','./app/controllers/admin/users_admin.php','./app/controllers/admin/articles_admin.php', './app/controllers/log_in.php', './app/controllers/logout.php', './favorites_list.php');
 generatenav('./app/controllers/recherche.php');
 
 function favori($userId) {
@@ -62,7 +62,7 @@ function favori($userId) {
             </div>
 
             <div>
-                <a href="./app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                <a href="./app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>" class="ajax-link">
                     <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                 </a>
             </div>

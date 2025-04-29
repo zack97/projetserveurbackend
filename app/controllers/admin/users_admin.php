@@ -18,8 +18,8 @@ $users = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
 
 // Génération de la page
 generatehead('../../../assets/css/main.css');
-generateHeader('../../../index.php','../../../database/press_media/media/news.jpg', '','' , '../../app/controllers/log_in.php', '../../app/controllers/logout.php', '../../favorites_list.php');
-generatenav('recherche.php');
+generateHeader('../../../index.php','../../../database/press_media/media/news.jpg', '','./articles_admin.php' , '../log_in.php', '../logout.php', '../../../favorites_list.php');
+generatenav('../recherche.php');
 ?>
 
 <div class="user_admin">
@@ -55,7 +55,7 @@ generatenav('recherche.php');
                             <div class="favorite-item">
                                 <span class="favorite-counter"><?php echo $counter; ?>.</span>
                                 <span class="favorite-id">[ID: <?php echo htmlspecialchars($fav['id_art']); ?>]</span>
-                                <a class="favorite-link" href="../../controllers/single_article.php?id=<?php echo htmlspecialchars($fav['id_art']); ?>">
+                                <a class="favorite-link ajax-link" href="../../controllers/single_article.php?id=<?php echo htmlspecialchars($fav['id_art']); ?>">
                                     <?php echo htmlspecialchars($fav['title_art']); ?>
                                 </a>
                                 <?php if (!empty($fav['image_art'])): ?>

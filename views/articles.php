@@ -14,7 +14,7 @@
                     foreach ($limitedArticles as $article) { ?>
                         <li>
                             <strong><?php echo htmlspecialchars($article['published']); ?></strong> -
-                            <a href="../app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
+                            <a href="../app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?> " class="ajax-link">
                                 <?php echo htmlspecialchars($article['title']); ?>
                             </a>
                         </li>
@@ -41,7 +41,7 @@
                         <?php if (!empty($article['image'])) { ?>
                             <img src="../database/press_media/media/<?php echo htmlspecialchars($article['image']); ?>" alt="small image" class="art_image">
                         <?php } ?>
-                        <a href="../app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>">
+                        <a href="../app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id']); ?>" class="ajax-link">
                             <h3 class="h6"><?php echo htmlspecialchars($article['title']); ?></h3>
                         </a>
                         <div class="article-content" style="margin-bottom: 1rem;">
