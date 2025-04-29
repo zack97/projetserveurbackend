@@ -56,7 +56,7 @@ generatenav('../recherche.php');
                     ?>
                 </td>
                 <td>
-                    <a href="edit_article.php?id=<?php echo $article['id_art']; ?>" class="btn btn-warning btn-sm mb-1 ajax-link">Edit</a>
+                    <a href="edit_article.php?id=<?php echo $article['id_art']; ?>" class="btn btn-warning btn-sm mb-1">Edit</a>
                     <form action="delete_article.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this article?');">
                         <input type="hidden" name="article_id" value="<?php echo $article['id_art']; ?>">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

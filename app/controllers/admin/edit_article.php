@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <button type="submit" class="btn btn-success">Save Changes</button>
-        <a href="articles_admin.php" class="btn btn-secondary ajax-link">Cancel</a>
+        <a href="articles_admin.php" class="btn btn-secondary ">Cancel</a>
     </form>
 </div>
 

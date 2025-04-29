@@ -62,7 +62,7 @@ function favori($userId) {
             </div>
 
             <div>
-                <a href="./app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>" class="ajax-link">
+                <a href="./app/controllers/single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
                     <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                 </a>
             </div>

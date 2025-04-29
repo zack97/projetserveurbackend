@@ -57,7 +57,7 @@ generatenav('recherche.php');
         </form>
         <div class="signup-link">
             <p style="color: black;">Don't have an account?</p>
-            <p><a href="sign_up.php">Sign up here</a>.</p>
+            <p><a href="sign_up.php" class="ajax-link">Sign up here</a>.</p>
         </div>
     </div>
 </div>

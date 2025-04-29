@@ -1,9 +1,6 @@
 <?php
 
-/**************************
- * Cette fonction contient le head, meta .. du site.
- *               GENERATEHEAD()
- * *************************************************** */
+
 
 function generatehead($cssPath=''){ ?>
   <!DOCTYPE html>
@@ -28,17 +25,7 @@ function generatehead($cssPath=''){ ?>
 
 
 
-/***************************************************************************************** */
 
-
-
-
-
-
-/**************************
- * Cette fonction contient le header du site.
- *               GENERATEHEADER()
- * *************************************************** */
 
 
  function generateHeader($indexPath='',$logoPath = '', $admin='',$client='', $loginPath = '', $logoutaction = '', $favoritesPath = '') {
@@ -47,7 +34,7 @@ function generatehead($cssPath=''){ ?>
          <div class="container">
              <div class="row align-items-center header-ul">
                  <div class="col-md-3 text-center text-md-left">
-                     <a href="<?php echo htmlspecialchars($indexPath) ?>" class="ajax-link">
+                     <a href="<?php echo htmlspecialchars($indexPath) ?>">
                          <img src="<?php echo htmlspecialchars($logoPath); ?>" alt="icone_news" class="logo img-fluid" />
                      </a>
                  </div>
@@ -55,7 +42,7 @@ function generatehead($cssPath=''){ ?>
                      <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
                          <?php if (isset($_SESSION['user'])): ?>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary ajax-link">Favorites</a>
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
                              </li>
                              <li class="mr-md-3">
                                  <span class="text-success">
@@ -68,15 +55,15 @@ function generatehead($cssPath=''){ ?>
                              </li>
                              <?php if ($_SESSION['user']['is_admin'] == 1): ?>
                                 <li class="mr-md-2">
-                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning ajax-link">Users</a>
+                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning">Users</a>
                                 </li>
                                 <li class="mr-md-2">
-                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info ajax-link">Articles</a>
+                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info">Articles</a>
                                 </li>
                             <?php endif; ?>
 
                              <li class="mr-md-3 d-flex align-items-center">
-                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2 ajax-link">
+                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
                                      <?php if (!empty($_SESSION['user']['profile_image'])): ?>
                                          <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
                                               alt="Profile Image" 
@@ -86,7 +73,7 @@ function generatehead($cssPath=''){ ?>
                                          <i class="fa-solid fa-user"></i>
                                      <?php endif; ?>
                                  </a>
-                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image" class="ajax-link">
+                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
                                      <i class="fas fa-eye text-primary"></i>
                                  </a>
                              </li>
@@ -99,7 +86,7 @@ function generatehead($cssPath=''){ ?>
                              <li class="mr-md-3" style="color: #333;">Questions? +1 (202) 335-3939</li>
                              <li class="mr-md-3" style="color: #333;">Contact</li>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary ajax-link">Log In</a>
+                                 <a href="<?php echo htmlspecialchars($loginPath); ?>" class="btn btn-primary">Log In</a>
                              </li>
                          <?php endif; ?>
                          <!-- Dropdown for background change -->
@@ -109,8 +96,8 @@ function generatehead($cssPath=''){ ?>
                                      Theme
                                  </button>
                                  <div class="dropdown-menu" aria-labelledby="themeDropdown">
-                                     <a class="dropdown-item ajax-link" href="#" id="light-theme">Light Theme</a>
-                                     <a class="dropdown-item ajax-link" href="#" id="dark-theme">Dark Theme</a>
+                                     <a class="dropdown-item" href="#" id="light-theme">Light Theme</a>
+                                     <a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a>
                                  </div>
                              </div>
                          </li>
@@ -222,17 +209,6 @@ function generatehead($cssPath=''){ ?>
  
 
 
-/***************************************************************************************** */
-
-
-
-
-
-/**************************
- * Cette fonction contient la nav du site.
- *               GENERATENAV()
- * *************************************************** */
-
 
 function generatenav($recherchePath=''){
     ?>
@@ -343,15 +319,7 @@ function generatenav($recherchePath=''){
 
 
 
-/***************************************************************************************** */
 
-
-
-
-/**************************
- * Cette fonction contient le footer du site.
- *               GENERATEHEADER()
- * *************************************************** */
 
 function generatefooter(){
     ?>
@@ -444,15 +412,7 @@ function generatefooter(){
 
 
 
-/***************************************************************************************** */
 
-
-
-
-/**************************
- * Cette fonction contient les liens bootsraap et la fermeture du body et html du site.
- *               GENERATEBOOTTRAAP()
- * *************************************************** */
 
 
 
@@ -471,14 +431,6 @@ function generateboottraap(){
 
 
 
-
-
-
-
-/**************************
- * Cette fonction contient le formulaire de recherche d'articles sur le site.
- *               RECHERCHEFORMULAIRE()
- * *************************************************** */
 
  
 
@@ -544,18 +496,6 @@ function generateboottraap(){
 
 
 
-/***************************************************************************************** */
-
-
-
-
-
-/**************************
- * Cette fonction gère l'envoi des requêtes de recherche d'articles au serveur
- *               RECHERCHEARTICLES()
- * *************************************************** */
-
-
 function rechercheArticles($pdo) {
 
     // Récupérer les données du formulaire
@@ -577,14 +517,7 @@ function rechercheArticles($pdo) {
 
 
 
-/***************************************************************************************** */
 
-
-
-/**************************
- * Cette fonction contient les articles retrouver après recherche
- *               FOUNDARTICLES()
- * *************************************************** */
 
 
 function foundarticle($articles) {
@@ -612,7 +545,7 @@ function foundarticle($articles) {
                                 <img src="../../database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" 
                                      alt="Image de l'article" class="mr-2 image-size">
                             <?php } ?>
-                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>" class="ajax-link">
+                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
                                 <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                             </a>
                             <div class="article-content" style="margin-bottom: 1rem;">

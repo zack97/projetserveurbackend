@@ -91,7 +91,7 @@ generatenav('recherche.php');
         </form>
         <div class="login-link">
             <p style="color: black;">Already have an account?</p>
-            <p><a href="log_in.php" class="ajax-link">Log in here</a>.</p>
+            <p><a href="log_in.php">Log in here</a>.</p>
         </div>
     </div>
 </div>
