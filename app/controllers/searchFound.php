@@ -103,7 +103,7 @@ function foundarticle($articles) {
                         $words = explode(' ', strip_tags($article['content_art']));
                         $shortContent = htmlspecialchars(implode(' ', array_slice($words, 0, 20))) . '...';
                         ?>  
-                        <article class="mb-3 border-bottom pb-3">
+                        <article class="mb-3 border-bottom pb-3 ajax-link">
                             <div>
                                 <small>Publié le <?php echo htmlspecialchars($article['date_art'] ?? 'Date inconnue'); ?></small>
                             </div>
@@ -111,7 +111,7 @@ function foundarticle($articles) {
                                 <img src="../../database/press_media/media/<?php echo htmlspecialchars($article['image_art']); ?>" 
                                      alt="Image de l'article" class="mr-2 image-size">
                             <?php } ?>
-                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>">
+                            <a href="single_article.php?id=<?php echo htmlspecialchars($article['id_art']); ?>" class="ajax-link">
                                 <h3 class="h6"><?php echo htmlspecialchars($article['title_art']); ?></h3>
                             </a>
                             <div class="article-content" style="margin-bottom: 1rem;">
