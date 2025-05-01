@@ -16,10 +16,11 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $users = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
 
 $favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../../favorites_list.php'; // Chemin des favoris par défaut
-$admin = isset($admin) ? $admin : ''; // Lien vers l'admin, valeur par défaut
+$admin = isset($admin) ? $admin : '#'; // Lien vers l'admin, valeur par défaut
 $client = isset($client) ? $client : './articles_admin.php'; // Lien vers le client, valeur par défaut
 $logoutaction = isset($logoutaction) ? $logoutaction : '../logout.php'; // Lien de déconnexion, valeur par défaut
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,10 @@ $logoutaction = isset($logoutaction) ? $logoutaction : '../logout.php'; // Lien 
 <!-- Font Awesome CDN -->    
 <link rel="stylesheet" href="../../../assets/css/main.css" />
     <link rel="stylesheet" href="../../../assets/css/article.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</head>
 <body  id="site-header">
      <header class="py-4">
          <div class="container">
@@ -337,9 +341,6 @@ $logoutaction = isset($logoutaction) ? $logoutaction : '../logout.php'; // Lien 
           </div>
       </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
     </body>
 </html>
