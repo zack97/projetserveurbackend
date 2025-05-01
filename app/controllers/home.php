@@ -21,6 +21,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/css/main.css" />
     <link rel="stylesheet" href="../../assets/css/article.css">
+    <link rel="stylesheet" href="../../assets/cssResponssive/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -80,8 +81,8 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                             </form>
                         </li>
                     <?php else: ?>
-                        <li class="mr-md-3" style="color: #333;">Questions? +1 (202) 335-3939</li>
-                        <li class="mr-md-3" style="color: #333;">Contact</li>
+                        <li class="mr-md-3 none" style="color: #333;">Questions? +1 (202) 335-3939</li>
+                        <li class="mr-md-3 none" style="color: #333;">Contact</li>
                         <li class="mr-md-3">
                             <a href="/app/controllers/loginPage.php" class="btn btn-primary ajax-link">Log In</a>
                         </li>
@@ -213,42 +214,27 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle w-100" type="button" id="aboutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-dark" type="button">
                         About
                     </button>
-                </div>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-dark w-100" type="button">Pricing</button>
+                <button class="btn btn-dark" type="button">Pricing</button>
             </div>
             <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle w-100" type="button" id="distributionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Distribution
+                    <button class="btn btn-dark" type="button">
+                        Favorites
                     </button>
-                </div>
             </div>
             <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle w-100" type="button" id="pressReleasesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Press Releases
+                    <button class="btn btn-dark " ype="button" >
+                        Users
                     </button>
-                </div>
             </div>
             <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle w-100" type="button" id="newswiresDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Newswires
+                    <button class="btn btn-dark" type="button">
+                        Articles
                     </button>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle w-100" type="button" id="knowledgeBaseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Knowledge Base
-                    </button>
-                </div>
             </div>
             <div class="col-md-12 nav_search">
                 <button class="btn btn-dark w-100" type="button"><a href= "/app/controllers/recherche.php">Search Articles</a></button>
