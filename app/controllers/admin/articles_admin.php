@@ -18,7 +18,7 @@ $articles = $pdo->query("SELECT * FROM t_article")->fetchAll(PDO::FETCH_ASSOC);
 $favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../../favorites_list.php'; // Chemin des favoris par défaut
 $admin = isset($admin) ? $admin : './users_admin.php'; // Lien vers l'admin, valeur par défaut
 $client = isset($client) ? $client : ''; // Lien vers le client, valeur par défaut
-$logoutaction = isset($logoutaction) ? $logoutaction : '/logout.php'; // Lien de déconnexion, valeur par défaut
+$logoutaction = isset($logoutaction) ? $logoutaction : '../logout.php'; // Lien de déconnexion, valeur par défaut
 ?>
 
 <!DOCTYPE html>
