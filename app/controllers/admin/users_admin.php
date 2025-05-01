@@ -16,7 +16,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $users = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
 
 $favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../../favorites_list.php'; // Chemin des favoris par défaut
-$admin = isset($admin) ? $admin : ''; // Lien vers l'admin, valeur par défaut
+$admin = isset($admin) ? $admin : '#'; // Lien vers l'admin, valeur par défaut
 $client = isset($client) ? $client : './articles_admin.php'; // Lien vers le client, valeur par défaut
 $logoutaction = isset($logoutaction) ? $logoutaction : '/logout.php'; // Lien de déconnexion, valeur par défaut
 ?>

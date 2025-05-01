@@ -38,7 +38,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
          <div class="container">
              <div class="row align-items-center header-ul">
                  <div class="col-md-3 text-center text-md-left">
-                     <a href="../../index.php">
+                     <a href="../../index.php" class="ajax-link">
                          <img src="../../database/press_media/media/news.jpg" alt="icone_news" class="logo img-fluid" />
                      </a>
                  </div>
@@ -46,7 +46,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                      <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
                          <?php if (isset($_SESSION['user'])): ?>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary ajax-link">Favorites</a>
                              </li>
                              <li class="mr-md-3">
                                  <span class="text-success">
@@ -59,15 +59,15 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                              </li>
                              <?php if ($_SESSION['user']['is_admin'] == 1): ?>
                                 <li class="mr-md-2">
-                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning">Users</a>
+                                    <a href="<?php echo htmlspecialchars($admin) ?>" class="btn btn-outline-warning ajax-link">Users</a>
                                 </li>
                                 <li class="mr-md-2">
-                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info">Articles</a>
+                                    <a href="<?php echo htmlspecialchars($client)?>" class="btn btn-outline-info ajax-link">Articles</a>
                                 </li>
                             <?php endif; ?>
 
                              <li class="mr-md-3 d-flex align-items-center">
-                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2">
+                                 <a href="#" data-toggle="modal" data-target="#profileImageModal" class="mr-2 ajax-link">
                                      <?php if (!empty($_SESSION['user']['profile_image'])): ?>
                                          <img src="<?php echo '../../app/controllers/' . htmlspecialchars($_SESSION['user']['profile_image']); ?>" 
                                               alt="Profile Image" 
@@ -77,7 +77,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                                          <i class="fa-solid fa-user"></i>
                                      <?php endif; ?>
                                  </a>
-                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image">
+                                 <a href="#" data-toggle="modal" data-target="#viewProfileImageModal" title="View Full Image" class="ajax-link">
                                      <i class="fas fa-eye text-primary"></i>
                                  </a>
                              </li>
@@ -90,7 +90,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                              <li class="mr-md-3" style="color: #333;">Questions? +1 (202) 335-3939</li>
                              <li class="mr-md-3" style="color: #333;">Contact</li>
                              <li class="mr-md-3">
-                                 <a href="/app/controllers/loginPage.php" class="btn btn-primary">Log In</a>
+                                 <a href="/app/controllers/loginPage.php" class="btn btn-primary ajax-link">Log In</a>
                              </li>
                          <?php endif; ?>
                          <!-- Dropdown for background change -->
