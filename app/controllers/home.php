@@ -1,37 +1,34 @@
-<?php 
-session_start();
+<?php
 require_once __DIR__ . '/../../models/ArticleModel.php';
-require_once './searchFound.php';  
+
 // Initialiser les variables
 $favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../favorites_list.php'; // Chemin des favoris par défaut
-$admin = isset($admin) ? $admin : './admin/users_admin.php'; // Lien vers l'admin, valeur par défaut
-$client = isset($client) ? $client : './admin/articles_admin.php'; // Lien vers le client, valeur par défaut
-$logoutaction = isset($logoutaction) ? $logoutaction : './logout.php'; // Lien de déconnexion, valeur par défaut
+$admin = isset($admin) ? $admin : './app/controllers/admin/users_admin.php'; // Lien vers l'admin, valeur par défaut
+$client = isset($client) ? $client : './app/controllers/admin/articles_admin.php'; // Lien vers le client, valeur par défaut
+$logoutaction = isset($logoutaction) ? $logoutaction : './app/controllers/logout.php'; // Lien de déconnexion, valeur par défaut
 
 // Récupération des articles
 $latestArticles = ArticleModel::getArticles(); // Appel statique à la méthode getArticles()
 $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la méthode getFeaturedArticles()
-
-
 ?>
 
+
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <!-- Font Awesome CDN -->    
-    <link rel="stylesheet" href="../../assets/css/main.css" />
-     <link rel="stylesheet" href="../../assets/css/article.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-   </head>
-   <body  id="site-header">
-   <header class="py-4">
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Newswire Jamaica</title>
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<!-- Font Awesome CDN -->    
+<link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
+<body  id="site-header">
+     <header class="py-4">
          <div class="container">
              <div class="row align-items-center header-ul">
                  <div class="col-md-3 text-center text-md-left">
@@ -43,7 +40,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                      <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
                          <?php if (isset($_SESSION['user'])): ?>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($favoritesPath) ?>" class="btn btn-outline-primary">Favorites</a>
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
                              </li>
                              <li class="mr-md-3">
                                  <span class="text-success">
@@ -251,85 +248,19 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
             </div>
         </div>
     </nav>
-    
-<div class="full_recherche_content">
-    <?php rechercheformulaire();?>
-</div>
-<footer class="footer">
+
+   <?php $controller = new ArticleController();
+$controller->showArticles();
+?>
+     <footer class="footer">
           <div class="container">
               <div class="row">
                   <div class="col-12 col-md-4 col-lg-2 bloc">
                       <h3>PR Distribution</h3>
-                      <ul>
-                          <li>How It Works</li>
-                          <li>Why Us</li>
-                          <li>Pricing</li>
-                          <li>Distribution</li>
-                          <li>Editorial Guidelines</li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-2 bloc">
-                      <h3>Newswires</h3>
-                      <ul>
-                          <li>All Newswires</li>
-                          <li>World Newswires</li>
-                          <li>US Newswires</li>
-                          <li>Industry Newswires</li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-2 bloc">
-                      <h3>Press Releases</h3>
-                      <ul>
-                          <li>All Press Releases</li>
-                          <li>Releases by Country</li>
-                          <li>Releases by US State</li>
-                          <li>Releases by Industry</li>
-                          <li>Releases by Date</li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-2 bloc">
-                      <h3>Press Resources</h3>
-                      <ul>
-                          <li>World Media Directory</li>
-                          <li>Mobile App</li>
-                          <li>Affiliate Program</li>
-                          <li>RSS Feeds</li>
-                          <li>Email Newsletters</li>
-                          <li>News Alert Maker</li>
-                          <li>NewsPlugin</li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-2 bloc">
-                      <h3>Help/Support</h3>
-                      <ul>
-                          <li>FAQ</li>
-                          <li>Video Tutorials</li>
-                          <li>Client Testimonials</li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-2 bloc">
-                      <h3>About</h3>
-                      <ul>
-                          <li>About EIN Presswire</li>
-                          <li>Newsroom</li>
-                          <li>Investor Inquiries</li>
-                          <li>Career Opportunities</li>
-                          <li>Contact</li>
-                          <li>Follow EIN Presswire</li>
-                      </ul>
                       <img src="../../database/press_media/media/news.jpg" alt="icone_res" class="img-fluid">
                   </div>
               </div>
               <div class="row sous">
-                  <div class="col-12 col-md-3 text-center text-md-left">
-                      <h6>User Agreement</h6>
-                  </div>
-                  <div class="col-12 col-md-3 text-center text-md-left">
-                      <h6>Privacy Policy</h6>
-                  </div>
-                  <div class="col-12 col-md-3 text-center text-md-left">
-                      <h6>Copyright Policy</h6>
-                  </div>
                   <div class="col-12 col-md-3 text-center text-md-left">
                       <h6>©1995-2024 Newsmatics Inc. dba EIN Presswire All Rights Reserved.</h6>
                   </div>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require_once './body.php';
 require_once '../models/User.php';
 
 $userModel = new User();
@@ -43,60 +42,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
-
-generatehead('../../assets/css/main.css');
-generateHeader('../../index.php','../../database/press_media/media/news.jpg', './admin/users_admin.php','./admin/articles_admin.php', './log_in.php', './logout.php','../../favorites_list.php');
-generatenav('recherche.php');
-?>
-
-<div class="container full-height d-flex justify-content-center align-items-center">
-    <div class="signup-container">
-        <h1>Sign Up</h1>
-
-        <?php if (isset($errorMessage)) : ?>
-            <div class="alert alert-danger"><?= htmlspecialchars($errorMessage); ?></div>
-        <?php elseif (isset($successMessage)) : ?>
-            <div class="alert alert-success"><?= htmlspecialchars($successMessage); ?></div>
-        <?php endif; ?>
-
-        <form action="" method="POST">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-            </div>
-
-            <!-- Option pour définir un utilisateur comme admin -->
-            <div class="form-group">
-                <label for="is_admin">
-                    <input type="checkbox" id="is_admin" name="is_admin"> Register as Admin
-                </label>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
-        </form>
-        <div class="login-link">
-            <p style="color: black;">Already have an account?</p>
-            <p><a href="log_in.php">Log in here</a>.</p>
-        </div>
-    </div>
-</div>
-
-<?php
-generatefooter('../../database/press_media/media/res.jpg');
-generateboottraap();
-?>
+include_once './signupPage.php';

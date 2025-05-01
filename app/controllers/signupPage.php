@@ -1,11 +1,12 @@
 <?php 
-session_start();
 require_once __DIR__ . '/../../models/ArticleModel.php';
 require_once './searchFound.php';  
+require_once './sign_up.php';
+
 // Initialiser les variables
-$favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../favorites_list.php'; // Chemin des favoris par défaut
-$admin = isset($admin) ? $admin : './admin/users_admin.php'; // Lien vers l'admin, valeur par défaut
-$client = isset($client) ? $client : './admin/articles_admin.php'; // Lien vers le client, valeur par défaut
+$favoritesPath = isset($favoritesPath) ? $favoritesPath : '#'; // Chemin des favoris par défaut
+$admin = isset($admin) ? $admin : '#'; // Lien vers l'admin, valeur par défaut
+$client = isset($client) ? $client : '#'; // Lien vers le client, valeur par défaut
 $logoutaction = isset($logoutaction) ? $logoutaction : './logout.php'; // Lien de déconnexion, valeur par défaut
 
 // Récupération des articles
@@ -14,13 +15,14 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
 
 
 ?>
+ 
 
 <!DOCTYPE html>
     <html lang="en">
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search</title>
+    <title>Sign Up</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -30,6 +32,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
      <link rel="stylesheet" href="../../assets/css/article.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
    </head>
+   <body>
    <body  id="site-header">
    <header class="py-4">
          <div class="container">
@@ -43,7 +46,7 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
                      <ul class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end mb-0" id="header-links">
                          <?php if (isset($_SESSION['user'])): ?>
                              <li class="mr-md-3">
-                                 <a href="<?php echo htmlspecialchars($favoritesPath) ?>" class="btn btn-outline-primary">Favorites</a>
+                                 <a href="<?php echo htmlspecialchars($favoritesPath); ?>" class="btn btn-outline-primary">Favorites</a>
                              </li>
                              <li class="mr-md-3">
                                  <span class="text-success">
@@ -251,10 +254,52 @@ $featuredArticles = ArticleModel::getFeaturedArticles(); // Appel statique à la
             </div>
         </div>
     </nav>
-    
-<div class="full_recherche_content">
-    <?php rechercheformulaire();?>
+<div class="container full-height d-flex justify-content-center align-items-center">
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+
+        <?php if (isset($errorMessage)) : ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($errorMessage); ?></div>
+        <?php elseif (isset($successMessage)) : ?>
+            <div class="alert alert-success"><?= htmlspecialchars($successMessage); ?></div>
+        <?php endif; ?>
+
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            </div>
+
+            <!-- Option pour définir un utilisateur comme admin -->
+            <div class="form-group">
+                <label for="is_admin">
+                    <input type="checkbox" id="is_admin" name="is_admin"> Register as Admin
+                </label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+        <div class="login-link">
+            <p style="color: black;">Already have an account?</p>
+            <p><a href="log_in.php">Log in here</a>.</p>
+        </div>
+    </div>
 </div>
+
 <footer class="footer">
           <div class="container">
               <div class="row">

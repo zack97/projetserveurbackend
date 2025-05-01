@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
 
-class ArticleModelclass {
+class ArticleModelClass {
     public static function getArticles() {
         try {
             $conn = Database::connect();
@@ -11,7 +11,6 @@ class ArticleModelclass {
             die("Erreur lors de la récupération des articles : " . $e->getMessage());
         }
     }
-
 
     public static function getArticleById($id) {
         try {
