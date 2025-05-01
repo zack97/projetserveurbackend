@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../models/ArticleModel.php';
-
+//continue
 // Initialiser les variables
 $favoritesPath = isset($favoritesPath) ? $favoritesPath : '../../favorites_list.php'; // Chemin des favoris par défaut
 $admin = isset($admin) ? $admin : './app/controllers/admin/users_admin.php'; // Lien vers l'admin, valeur par défaut
